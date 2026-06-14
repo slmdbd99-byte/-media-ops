@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>七赛道孵化作战手册 · 东华大学新媒体运营</title>
+<meta name="description" content="44 名学员 · 7 赛道 · 调研即内容 · 零基础可跑通的内容引擎">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1026; --ink2:#141B33; --panel:#18203c; --panel2:#1d2748;
+  --line:rgba(201,162,75,.20); --line2:rgba(255,255,255,.07);
+  --gold:#C9A24B; --gold2:#E7C57E; --teal:#58D6C0; --rose:#E89079;
+  --tx:#ECE8DD; --mut:#9AA6C4; --mut2:#6f7aa0;
+  --serif:"Noto Serif SC",Georgia,"Songti SC",serif;
+  --sans:"Noto Sans SC",system-ui,"PingFang SC",-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+  --rail:248px; --max:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink); color:var(--tx); font-family:var(--sans);
+  font-size:16px; line-height:1.65; letter-spacing:.01em;
+  background-image:
+    linear-gradient(rgba(201,162,75,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,162,75,.035) 1px,transparent 1px),
+    radial-gradient(1200px 600px at 80% -10%,rgba(88,214,192,.06),transparent),
+    radial-gradient(1000px 500px at -10% 10%,rgba(201,162,75,.07),transparent);
+  background-size:46px 46px,46px 46px,100% 100%,100% 100%;
+}
+a{color:inherit;text-decoration:none}
+em{font-style:normal;color:var(--gold2)}
+small{font-size:.78em}
+::selection{background:rgba(201,162,75,.3)}
+
+/* layout */
+.shell{display:flex;min-height:100vh}
+.rail{
+  width:var(--rail);flex:0 0 var(--rail);position:sticky;top:0;height:100vh;
+  border-right:1px solid var(--line);padding:26px 20px;background:linear-gradient(180deg,#0d1330,#0a0f24);
+  display:flex;flex-direction:column;gap:8px;z-index:40
+}
+.brand{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--gold);margin-bottom:6px}
+.brand b{display:block;font-family:var(--serif);font-size:19px;font-weight:900;letter-spacing:.02em;color:var(--tx);margin-top:6px;line-height:1.3}
+.nav{display:flex;flex-direction:column;gap:2px;margin-top:14px}
+.nav a{
+  font-size:14.5px;padding:10px 12px;border-radius:9px;color:var(--mut);display:flex;align-items:center;gap:10px;
+  border:1px solid transparent;transition:.18s
+}
+.nav a:hover{color:var(--tx);background:rgba(255,255,255,.04)}
+.nav a.on{color:var(--ink);background:linear-gradient(90deg,var(--gold2),var(--gold));font-weight:700;border-color:var(--gold)}
+.nav a .ico{font-size:15px;width:20px;text-align:center}
+.nav .navnum{margin-left:auto;font-family:var(--mono);font-size:10px;opacity:.7}
+.rail .foot{margin-top:auto;font-size:11px;color:var(--mut2);line-height:1.6;border-top:1px solid var(--line2);padding-top:14px}
+
+.main{flex:1;min-width:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:46px 30px 90px}
+
+/* topbar (mobile) */
+.topbar{display:none;position:sticky;top:0;z-index:50;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:rgba(11,16,38,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar b{font-family:var(--serif);font-weight:900;font-size:15px}
+.topbar .burger{font-size:22px;background:none;border:1px solid var(--line);color:var(--gold);border-radius:8px;width:40px;height:38px}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:45}
+
+/* hero */
+.hero,.phead{border-bottom:1px solid var(--line);padding-bottom:30px;margin-bottom:34px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.cls{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink);background:var(--rose);padding:2px 8px;border-radius:4px;font-weight:700}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(28px,5.2vw,50px);line-height:1.14;margin:18px 0 14px;letter-spacing:.01em}
+.phead h1{font-family:var(--serif);font-weight:900;font-size:clamp(26px,4.6vw,42px);line-height:1.16;margin:16px 0 12px}
+.lede{font-size:clamp(15px,1.7vw,18px);color:var(--mut);max-width:62ch}
+.lede.tight{margin-bottom:4px}
+
+/* engine signature */
+.engine{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:30px 0 8px}
+.enode{flex:1 1 130px;min-width:120px;border:1px solid var(--line);border-radius:12px;padding:16px 14px;
+  background:linear-gradient(180deg,var(--panel),var(--ink2));position:relative;opacity:0;transform:translateY(10px);transition:.5s cubic-bezier(.2,.7,.3,1)}
+.enode.in{opacity:1;transform:none}
+.enode .ei{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em}
+.enode .et{display:block;font-family:var(--serif);font-weight:700;font-size:17px;margin-top:6px}
+.econn{flex:0 0 30px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);position:relative;align-self:center;margin:0 -1px}
+.econn i{position:absolute;right:-2px;top:-3px;width:8px;height:8px;border-top:2px solid var(--gold);border-right:2px solid var(--gold);transform:rotate(45deg)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0}
+.stats>div{border:1px solid var(--line2);border-radius:12px;padding:16px;background:rgba(255,255,255,.02)}
+.stats b{font-family:var(--serif);font-size:30px;font-weight:900;color:var(--gold2);display:block;line-height:1}
+.stats span{font-size:12.5px;color:var(--mut);display:block;margin-top:6px}
+
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;padding:12px 20px;border-radius:10px;border:1px solid var(--line);cursor:pointer;transition:.18s;font-family:var(--sans)}
+.btn.gold{background:linear-gradient(90deg,var(--gold2),var(--gold));color:#1a1404;border-color:var(--gold)}
+.btn.gold:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--tx)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold2)}
+.btn.sm{padding:8px 14px;font-size:13px}
+
+/* sections */
+.block{margin:38px 0}
+.sec{font-family:var(--serif);font-weight:700;font-size:clamp(20px,2.6vw,27px);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec .dot{width:9px;height:9px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 4px rgba(201,162,75,.15)}
+.note{color:var(--mut);font-size:14px;margin:-8px 0 16px;max-width:70ch}
+.micro{color:var(--mut2);font-size:12px;margin-top:8px}
+
+/* grids & cards */
+.grid{display:grid;gap:16px}
+.grid.tracks{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.grid.g3{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.card{border:1px solid var(--line2);border-radius:14px;background:linear-gradient(180deg,var(--panel),var(--ink2));padding:20px;transition:.18s}
+.card.track{border-color:var(--line);position:relative;overflow:hidden}
+.card.track:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac,var(--gold))}
+.card.track:hover{transform:translateY(-3px);border-color:var(--ac,var(--gold))}
+.tk-top{display:flex;justify-content:space-between;align-items:center}
+.tk-top .emoji{font-size:26px}
+.tk-top .code{font-family:var(--mono);font-size:12px;color:var(--ac,var(--gold));border:1px solid var(--line);padding:2px 8px;border-radius:20px}
+.card.track h3{font-family:var(--serif);font-size:22px;font-weight:900;margin:12px 0 6px}
+.card.track p{font-size:13.5px;color:var(--mut);min-height:38px}
+.tk-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--mut2);margin-top:14px;border-top:1px solid var(--line2);padding-top:10px;font-family:var(--mono)}
+
+.card.lead .lead-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.gtag{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--ink);background:var(--gold);padding:2px 9px;border-radius:6px}
+.lead-h .trk{font-size:13px;color:var(--mut)}
+.lead-n{font-family:var(--serif);font-weight:700;font-size:17px}
+.lead-n small{color:var(--gold2);font-family:var(--sans);font-weight:500}
+.lead-m{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.lead-m span{font-size:11.5px;color:var(--mut);font-family:var(--mono);background:rgba(255,255,255,.03);padding:3px 7px;border-radius:6px}
+
+.how{list-style:none;counter-reset:h;display:grid;gap:10px}
+.how li{counter-increment:h;position:relative;padding:14px 16px 14px 52px;border:1px solid var(--line2);border-radius:12px;font-size:14.5px;color:var(--mut)}
+.how li:before{content:counter(h);position:absolute;left:14px;top:13px;font-family:var(--mono);font-weight:700;color:var(--ink);background:var(--gold);width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:13px}
+.how b{color:var(--tx)}
+.tip{background:linear-gradient(180deg,rgba(88,214,192,.05),transparent);border:1px solid var(--line2);border-radius:16px;padding:8px 22px 22px}
+
+@media print{.rail,.topbar,.scrim,.cta-row,.tools-skip{display:none!important}.main{width:100%}.wrap{max-width:100%;padding:0}body{background:#fff;color:#111}.card,.enode{break-inside:avoid}}
+/* SOP */
+.sop{display:grid;gap:12px}
+.sop-step{display:flex;gap:16px;border:1px solid var(--line2);border-radius:13px;padding:16px 18px;background:rgba(255,255,255,.02)}
+.sop-step .sn{font-family:var(--mono);font-weight:700;font-size:22px;color:var(--gold);flex:0 0 auto;line-height:1.2}
+.sop-step h4{font-family:var(--serif);font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sop-step h4 .who{font-family:var(--mono);font-size:10.5px;color:var(--teal);border:1px solid rgba(88,214,192,.3);padding:1px 8px;border-radius:20px;font-weight:500}
+.sop-step p{font-size:14px;color:var(--mut)}
+.sop-step .meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:8px;font-size:12px;color:var(--mut2);font-family:var(--mono)}
+.sop-step .meta .z{color:var(--teal)}
+
+/* research-as-content pipeline */
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;counter-reset:pp}
+.pstep{counter-increment:pp;border:1px solid var(--line);border-radius:13px;padding:16px;background:linear-gradient(180deg,var(--panel),var(--ink2));position:relative}
+.pstep:before{content:"步骤 "counter(pp);font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.1em}
+.pstep h4{font-family:var(--serif);font-size:16px;margin:6px 0}
+.pstep p{font-size:13px;color:var(--mut)}
+.loopback{text-align:center;font-family:var(--mono);font-size:12px;color:var(--teal);margin-top:14px}
+
+/* tools */
+.tool{border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;background:linear-gradient(180deg,var(--panel),var(--ink2))}
+.tool h3{font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:4px}
+.tool h3 b{color:var(--gold)}
+.tdesc{font-size:13.5px;color:var(--mut);margin-bottom:14px}
+.tform{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+.tform label,.bpi label{font-size:12.5px;color:var(--mut);display:flex;flex-direction:column;gap:6px}
+input,select{font-family:var(--sans);font-size:14px;background:var(--ink);border:1px solid var(--line2);color:var(--tx);border-radius:9px;padding:9px 11px}
+input:focus,select:focus{outline:none;border-color:var(--gold)}
+input[type=number]{width:110px}
+.inline{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--mut)}
+.tout{margin-top:16px}
+.tout .res{border:1px dashed var(--line);border-radius:12px;padding:16px;background:rgba(201,162,75,.04)}
+.tout .verdict{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:6px}
+.bar{height:12px;border-radius:7px;background:linear-gradient(90deg,var(--gold),var(--gold2));margin:4px 0}
+.allocrow{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:14px}
+.allocrow .lab{flex:0 0 130px;color:var(--mut)}
+.allocrow .barwrap{flex:1;background:rgba(255,255,255,.05);border-radius:7px;overflow:hidden}
+.allocrow .v{flex:0 0 80px;text-align:right;font-family:var(--mono);color:var(--gold2)}
+.bpi{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:14px}
+.bpi .sv{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.bpi .sv .row{display:flex;justify-content:space-between;align-items:center}
+.bpi input[type=range]{width:100%;accent-color:var(--gold)}
+.scorebig{font-family:var(--mono);font-size:42px;font-weight:700;color:var(--gold2);line-height:1}
+
+.dtbl-wrap{overflow-x:auto;border:1px solid var(--line2);border-radius:12px}
+.dtbl{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+.dtbl th{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--gold);text-align:left;padding:10px;border-bottom:1px solid var(--line);background:rgba(201,162,75,.05);white-space:nowrap}
+.dtbl td{padding:7px 10px;border-bottom:1px solid var(--line2)}
+.dtbl td input{width:78px;padding:6px 8px}
+.dtbl td.calc{font-family:var(--mono);color:var(--gold2)}
+.dtbl tr.best td{background:rgba(88,214,192,.08)}
+.dtbl .del{background:none;border:none;color:var(--rose);cursor:pointer;font-size:16px}
+.dtbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px}
+
+/* track page */
+.tpane{border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;background:linear-gradient(180deg,var(--panel),var(--ink2))}
+.tpane h3{font-family:var(--serif);font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.tpane h3 .tn{font-family:var(--mono);font-size:11px;color:var(--ac,var(--gold));border:1px solid var(--line);border-radius:20px;padding:2px 9px}
+.tlist{list-style:none;display:grid;gap:8px}
+.tlist li{font-size:14.5px;color:var(--mut);padding-left:20px;position:relative}
+.tlist li:before{content:"▹";position:absolute;left:0;color:var(--ac,var(--gold))}
+.tlist li b,.tpane p b{color:var(--tx)}
+.tband{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 6px}
+.tband a{font-size:13px;color:var(--mut);border:1px solid var(--line2);padding:6px 12px;border-radius:9px;font-family:var(--mono)}
+.tband a:hover{border-color:var(--gold);color:var(--gold2)}
+.qa{counter-reset:q;display:grid;gap:7px}
+.qa li{counter-increment:q;list-style:none;font-size:14px;color:var(--mut);padding-left:34px;position:relative}
+.qa li:before{content:"Q"counter(q);position:absolute;left:0;top:0;font-family:var(--mono);font-size:11px;color:var(--ac,var(--gold));font-weight:700}
+.qa li.opt:before{content:"Q"counter(q);}
+.subh{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--gold);margin:16px 0 8px;text-transform:uppercase}
+.bp{border-left:3px solid var(--gold);padding:4px 0 4px 18px;display:grid;gap:12px}
+.bp p{font-size:14px;color:var(--mut)}
+.bp p b{color:var(--gold2);font-family:var(--serif)}
+
+/* people */
+.pfilter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.pfilter button{font-family:var(--sans);font-size:13px;padding:7px 14px;border-radius:20px;border:1px solid var(--line2);background:transparent;color:var(--mut);cursor:pointer;transition:.15s}
+.pfilter button:hover{color:var(--tx)}
+.pfilter button.on{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700}
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.pcard{border:1px solid var(--line2);border-radius:14px;background:linear-gradient(180deg,var(--panel),var(--ink2));padding:18px;display:flex;flex-direction:column;gap:10px}
+.pcard .ph{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.pcard .pid{font-family:var(--mono);font-size:12px;color:var(--gold)}
+.pcard .pn{font-family:var(--serif);font-size:21px;font-weight:900}
+.pcard .pn small{font-family:var(--sans);font-weight:400;color:var(--mut);font-size:12px;margin-left:6px}
+.pcard .ptrk{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--line);color:var(--gold2);white-space:nowrap}
+.pbadges{display:flex;flex-wrap:wrap;gap:5px}
+.pbadges span{font-size:10.5px;font-family:var(--mono);color:var(--mut);background:rgba(255,255,255,.04);padding:2px 7px;border-radius:5px}
+.pbadges span.lead{background:var(--gold);color:var(--ink);font-weight:700}
+.pbadges span.res{background:rgba(88,214,192,.14);color:var(--teal)}
+.prole{font-size:13px;color:var(--gold2);font-weight:500}
+.pstr{font-size:13px;color:var(--mut2);border-top:1px solid var(--line2);padding-top:10px}
+.pcard .more{font-size:13px;color:var(--teal);cursor:pointer;font-family:var(--mono)}
+.pcard .detail{display:none}
+.pcard.open .detail{display:block}
+.pcard .detail h5{font-size:12px;font-family:var(--mono);color:var(--gold);letter-spacing:.06em;margin:12px 0 6px;text-transform:uppercase}
+.pcard .detail ul{list-style:none;display:grid;gap:6px}
+.pcard .detail li{font-size:13px;color:var(--mut);padding-left:16px;position:relative}
+.pcard .detail li:before{content:"·";position:absolute;left:4px;color:var(--gold)}
+.pcard .mates{display:flex;flex-wrap:wrap;gap:6px}
+.pcard .mates a{font-size:11px;font-family:var(--mono);color:var(--mut);border:1px solid var(--line2);padding:3px 8px;border-radius:6px}
+.pcard .mates a:hover{border-color:var(--gold);color:var(--gold2)}
+.pcard .pbtns{display:flex;gap:8px;margin-top:4px}
+.copybtn{flex:1;font-family:var(--sans);font-size:13px;font-weight:700;padding:9px;border-radius:9px;border:1px solid var(--gold);background:transparent;color:var(--gold2);cursor:pointer;transition:.15s}
+.copybtn:hover{background:var(--gold);color:var(--ink)}
+.copybtn.done{background:var(--teal);color:var(--ink);border-color:var(--teal)}
+
+/* person detail page */
+.chip{display:inline-flex;flex-direction:column;border:1px solid var(--line2);border-radius:10px;padding:8px 12px;font-size:13px}
+.chip small{color:var(--mut2);font-size:11px}
+
+.depthead{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+
+@media (max-width:880px){
+  .rail{position:fixed;left:0;top:0;transform:translateX(-100%);transition:.25s;box-shadow:8px 0 30px rgba(0,0,0,.4)}
+  body.navopen .rail{transform:none}
+  body.navopen .scrim{display:block}
+  .topbar{display:flex}
+  .wrap{padding:24px 18px 80px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .econn{display:none}
+  .enode{flex:1 1 44%}
+}
+@media (max-width:520px){
+  .pcards{grid-template-columns:1fr}
+  .bpi{grid-template-columns:1fr 1fr}
+  .stats b{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.enode{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="scrim" onclick="closeNav()"></div>
+<header class="topbar">
+  <button class="burger" onclick="toggleNav()" aria-label="菜单">☰</button>
+  <b>七赛道作战手册</b>
+  <span style="font-family:var(--mono);font-size:11px;color:var(--gold)">DHU</span>
+</header>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand">CONFIDENTIAL · 绝密<b>七赛道孵化<br>作战手册</b></div>
+    <nav class="nav">
+      <a href="#/home" data-k="home"><span class="ico">◆</span>总览<span class="navnum">00</span></a>
+      <a href="#/system" data-k="system"><span class="ico">⚙</span>系统中枢 · 工具<span class="navnum">SYS</span></a>
+      <a href="#/track/t1" data-k="track"><span class="ico">🌿</span>大健康<span class="navnum">T1</span></a>
+      <a href="#/track/t2" data-k="track"><span class="ico">🎬</span>短片电影<span class="navnum">T2</span></a>
+      <a href="#/track/t3" data-k="track"><span class="ico">🌹</span>香水<span class="navnum">T3</span></a>
+      <a href="#/track/t4" data-k="track"><span class="ico">💄</span>化妆品<span class="navnum">T4</span></a>
+      <a href="#/track/t5" data-k="track"><span class="ico">🕯️</span>香氛<span class="navnum">T5</span></a>
+      <a href="#/track/t6" data-k="track"><span class="ico">📱</span>短视频<span class="navnum">T6</span></a>
+      <a href="#/track/t7" data-k="track"><span class="ico">🎴</span>动漫<span class="navnum">T7</span></a>
+      <a href="#/people" data-k="people"><span class="ico">👥</span>全员任务档案<span class="navnum">44</span></a>
+      <a href="#/deploy" data-k="deploy"><span class="ico">🚀</span>部署上线<span class="navnum">WEB</span></a>
+    </nav>
+    <div class="foot">东华大学 · 人文学院<br>新媒体运营实战项目<br>仅供内部教学使用</div>
+  </aside>
+  <main class="main"><div class="wrap" id="app"></div></main>
+</div>
+<script>
+/* ===== 数据层 ===== */
+const GROUPS = {
+ 1:{code:"T1",track:"大健康",emoji:"🌿",leader:38,accent:"#7FB89A",
+   tagline:"用「情绪 + 轻养生」做年轻人的第一口健康",
+   market:["大健康 2030 年预计破 16 万亿,但 18–28 岁人群被传统保健品忽视。","痛点:年轻人「朋克养生」——既怕死又熬夜,需要低门槛、可即时见效、有情绪价值的方案。","机会:校园 + 女性 + 睡眠/护肝/解压等细分仍是蓝海,决策快、客单适中、复购高。"],
+   sounding:["1) 抖音/小红书搜「熬夜/失眠/护肝/体检异常」,导出近 90 天 Top100 笔记标题+点赞+评论;","2) 评论挖掘:把高赞笔记前 200 条评论入表,AI 打标签萃取痛点词频;","3) 微信指数+巨量算数查趋势,锁定上升细分;","4) 校园问卷 ≥100 份 + 深访 12 人。"],
+   data:["核心指标:需求热度、痛点强度(评论情绪分)、CPE、CVR、复购率。","数据源:巨量算数、千瓜、新红、微信指数、问卷星、自建回收表。","判断:『热度升×痛点强×竞品弱』三者成立即爆点候选。"],
+   viral:["引爆 = 反常识钩子 × 强情绪 × 1 个可复制动作。","选题:『体检报告这一项异常,90% 大学生都中招』『熬夜后急救三件套』。","真人口播 30s + 高能字幕 + 评论区『扣 1 领清单』,沉淀企业微信。"],
+   model:["『内容获客 → 私域社群 → 轻产品/服务变现』健康内容电商闭环。","落地:以「校园健康内容工作室」运营,内容免费、产品分销、服务付费,无需自建供应链。","创新:10 样品做『体验官计划』,UGC 反向生产内容,一份样品 = 一条内容 = 一次裂变。"],
+   profit:["① 健康好物分销佣金 15%–40%;② 9.9–49 元解压/助眠/护肝体验装;③ 99–199 元 21 天早睡训练营;④ 私域会员 + B 端定制内容。"],
+   ten:["10 样品 = 10 位校园体验官。集中投放:全给同一细分(如助眠)10 位高表达力同学,统一话术,72h 回收『前-中-后』短视频与问卷做对照,验证漏斗后放大。"],
+   zero:["手机+剪映+Canva+问卷星+企业微信全免费;产品走品牌『0 元寄样/佣金分销』,学生 0 资金启动。"],
+   sampling:["分层抽样:按年级×性别×消费力配额,目标 100–150 份问卷;","拦访取样:食堂/图书馆/宿舍楼下定点拦访 + ACG/健身/考研社群滚雪球;","深访 12 人:覆盖『熬夜党/养生党/体检异常/减脂』四类各 3 人。"],
+   survey:["你的年级与专业?","性别?","每月可支配消费区间(<800 / 800–1500 / 1500–3000 / >3000)?","你有以下哪些健康困扰?(熬夜/失眠/脱发/肠胃/焦虑/体检异常/无)","过去 3 个月是否买过健康相关产品(保健品/助眠/护肝/代餐)?频次?","你愿意为『改善睡眠/解压』单次花多少钱?","遇到健康问题你先做什么?(搜小红书/问朋友/看医生/忍着)","你被哪类内容种草过健康产品?(测评/科普/达人/朋友)","你更想要哪种形式?(体验装/打卡训练营/内容科普/社群陪伴)","愿意成为『校园健康体验官』(免费体验+反馈)吗?可留微信。"],
+   interview:["聊聊你最近一次熬夜或身体不舒服的经历?","当时最大的困扰是什么、持续多久?","你试过怎么解决、满意吗、为什么?","选健康产品时你最看重什么(成分/价格/口碑/见效)?","你愿意为一个真正有效的助眠/解压方案花多少钱?","你从哪里、被谁种草健康产品?最信任谁?","如果有同学做真实测评+陪伴打卡,你会参与吗?最担心什么?"]},
+
+ 2:{code:"T2",track:"短片电影",emoji:"🎬",leader:43,accent:"#C98B9B",
+   tagline:"15 分钟,把一个城市与一种情绪拍成可被传播的作品",
+   market:["微短剧 2025 年超 500 亿,品牌定制、文旅、招募短片需求爆发。","痛点:甲方要『有质感又能传播』短片,但预算有限、周期短;高校有人才缺通道。","机会:AI 辅助 + 学生剧组的『高性价比精品短片』卡位中小预算市场。"],
+   sounding:["1) B 站/抖音拆解近一年高赞品牌短片/微电影 50 部(题材-时长-钩子-转化);","2) 访谈本地 3–5 家品牌/文旅/MCN,收集真实命题与付费意愿;","3) 校内征集『你最想被拍成短片的故事』验证题材热度。"],
+   data:["核心指标:完播率、3s/15s 留存、转发率、单片成本、交付周期、复购。","数据源:平台后台、剪映创作数据、客户反馈表、工时表。","判断:完播+转发双高且成本可控的题材模板,固化为短片产品包。"],
+   viral:["引爆 = 强开场(前 3s 冲突)× 普世情绪 × 反转 × 0 旁白纯视听。","对标《刺客聂隐娘》留白、《乱》色彩、《8½》梦境,做可识别视觉语法。","高光 15s 切片单独发布引流完整版。"],
+   model:["『短片工作室』承接品牌/文旅/招募定制 + 自有 IP 短片孵化。","落地:课程作业/工作室作品起步,用代表作换商单,作品即获客。","创新:AI 分镜+AI 配音+学生实拍,单片成本压到行业 1/5、周期 7–10 天。"],
+   profit:["① 品牌定制短片 0.5–3 万/部;② 文旅/政企宣传片;③ 自有 IP 平台分账+投流;④ 短片 SOP/模板课程;⑤ 影像版权二次授权。"],
+   ten:["10 样品 = 10 个 15s 精剪切片(同片不同版本)。A/B 对照:同时投放测不同开场/封面/标题,用完播+转发选最优版本,再投流放大,作为商单数据证据。"],
+   zero:["剪映/CapCut + 即梦/可灵 AI 生视频 + 手机/借单反 + 校园场景全免费;先交付样片再签约,0 启动资金。"],
+   sampling:["B 端取样:列 20 家本地品牌/文旅/MCN/招商单位,约访 5 家做需求深访;","C 端取样:校内征集故事 50 条 + 对 30 名目标观众做偏好问卷;","观众盲测:小样片给 20 人测完播与情绪反应。"],
+   survey:["你最常看哪类短视频/短片?(剧情/品牌/文旅/纪实)","看一条视频多久会划走?","什么开场会让你看完?(冲突/悬念/颜值/共鸣)","你转发过的视频通常因为?(感动/有用/搞笑/认同)","你更喜欢有旁白还是纯画面叙事?","你愿意看多长的品牌短片?(15s/1min/5min/15min)","哪类故事最打动你?(成长/亲情/城市/职场/爱情)","你为本地哪类内容停留过?(美食/校园/文旅)","你会因短片去打卡某地/某品牌吗?","愿意参与短片拍摄(出镜/幕后)吗?可留微信。"],
+   interview:["(B 端)贵司过去做过哪些视频内容、效果如何?","最想通过短片解决什么(招募/品牌/文旅/带货)?","预算与周期的真实区间是多少?","你判断一条短片『好』的标准是什么?","过去合作影视团队最大的痛点是什么?","若学生团队能 1/5 成本做到 80% 质感,你会试吗?","(C 端)讲一条让你念念不忘的短片、它哪里打动你?"]},
+
+ 3:{code:"T3",track:"香水",emoji:"🌹",leader:25,accent:"#C9A24B",
+   tagline:"把一支香水讲成一个可被收藏的故事与圈层",
+   market:["中国香水年增 20%+,Z 世代悦己消费崛起,沙龙香/小众香高速增长。","痛点:小众香水获客贵、信任难建立;消费者『不知道适合自己的味道』。","机会:内容种草 + 嗅觉测评 + 圈层社群,低成本撬动高客单。"],
+   sounding:["1) 千瓜/新红导出『香水』近 90 天小红书爆文,拆标题公式与种草结构;","2) 评论挖掘疑虑(持久度/约会/学生党平价);","3) SKU 对标:50 款竞品价格-香调-卖点矩阵找空隙;","4) 校园嗅觉盲测 + 问卷。"],
+   data:["核心指标:种草互动率、收藏/赞比、试香转化、客单、连带率、私域复购。","数据源:千瓜、新红、电商后台、试香登记表。","判断:『内容互动高×定价空隙×试香转化高』即主推爆品。"],
+   viral:["引爆 = 场景化情绪(『面试自信香』『初恋的味道』)× 高级感视觉 × 嗅觉可视化文案。","真人测评 + 香调可视化 + 评论区试香福利,沉淀私域圈层。"],
+   model:["『香水内容 IP + 私域圈层 + 选品分销/定制』。","落地:校园香氛买手/测评工作室,内容免费、选品分销、定制付费。","创新:嗅觉『香调人格测试』做裂变 H5,一次测试 = 一次分享 + 一次转化。"],
+   profit:["① 小众香水分销/买手佣金;② 香水小样盲盒/试香套装;③ 99–199 元 1V1 选香服务;④ 品牌定制种草内容;⑤ 圈层社群会员。"],
+   ten:["10 样品 = 10 支不同香调小样。分散探测:覆盖 5 大香调各 2 支,做『香调人格』测评内容,收集偏好与转化,锁定最受欢迎香调后放大。"],
+   zero:["小红书/抖音 + Canva + H5 + 微信社群;产品走品牌寄样分销,0 资金启动。"],
+   sampling:["分层:按性别×是否用香×消费力配额,问卷 100–150 份;","线下盲测取样:在女生节/集市摆试香台,登记偏好与联系方式;","深访 10 人:含『资深玩家/新手/送礼者/学生党』。"],
+   survey:["你的年级与性别?","你目前用香水吗?多久用一次?","买香水的预算区间?","你买香水最看重?(香调/持久/瓶身/价格/品牌故事)","你最常在什么场合用香?(约会/面试/日常/送礼)","你喜欢哪类香调?(花香/果香/木质/海洋/不清楚)","你买香水前会做什么?(看测评/试香/问朋友/凭感觉)","你被哪类内容种草过香水?","『不知道适合自己的味道』是你的困扰吗?","愿意做『香调人格测评+试香官』吗?可留微信。"],
+   interview:["讲讲你和香水的故事、第一支是怎么选的?","选香时最大的困扰是什么?","你怎么判断一支香适合自己?","愿意为一支真正喜欢的香花多少钱?","你从哪里、被谁种草香水?最信任谁?","送礼场景你会怎么挑香?","若有人帮你 1V1 测香选香,你会试吗?担心什么?"]},
+
+ 4:{code:"T4",track:"化妆品",emoji:"💄",leader:10,accent:"#D98FA8",
+   tagline:"以测评与教程建立信任,把种草做成可复制的生意",
+   market:["国货美妆崛起,『成分党 + 平价替代 + 学生党妆容』需求旺盛。","痛点:产品同质化、信任成本高、KOL 投放贵;品牌缺真实校园场景内容。","机会:真实测评 + 教程 + 校园 KOC 矩阵,是品牌最需要的低价高信任内容。"],
+   sounding:["1) 抖音/小红书拆『学生党妆容/平价彩妆/成分测评』爆款结构;","2) 评论挖掘肤质/场景/预算痛点;","3) 竞品成分与价格矩阵对标;","4) 校园 30 人妆容偏好快调研 + 问卷。"],
+   data:["核心指标:教程完播、测评收藏率、好物点击-转化、连带、复购、KOC 产能。","数据源:千瓜、新红、电商后台、KOC 排期表。","判断:『教程互动高×成分话题热×转化好』即主推。"],
+   viral:["引爆 = 强效果对比(前后/上脸)× 平价反差 × 可立刻照做步骤。","真人上脸 + 教程字幕 + 『同款已挂车』,KOC 矩阵批量复制放大。"],
+   model:["『美妆测评/教程内容 + KOC 矩阵 + 好物分销/品牌合作』。","落地:校园美妆 KOC 联盟,统一选题话术,内容免费、带货分销、品牌合作付费。","创新:10 样品做『校园素人改造计划』,真实改造前后即最强带货素材。"],
+   profit:["① 好物分销佣金;② 品牌种草/探店报价;③ 妆容教程付费合集;④ KOC 矩阵代运营;⑤ 校园线下美妆活动。"],
+   ten:["10 样品 = 10 位不同肤质/风格素人。对照法:统一拍『使用 7 天』测评,产出真实对比内容,验证不同品类转化,锁定爆品后矩阵放大。"],
+   zero:["手机+环形灯(可借)+剪映+Canva;产品走品牌寄样/分销,学生 0 资金。"],
+   sampling:["分层:按肤质×妆龄×消费力配额,问卷 100–150 份;","素人取样:招募 10 位不同肤质『改造体验官』签知情同意;","深访 10 人:含『新手/成分党/学生党/油痘肌』。"],
+   survey:["年级与性别?","你化妆/护肤的熟练度?(新手/进阶/达人)","每月美妆消费区间?","你最关心的护肤/彩妆问题?(痘痘/敏感/底妆/手残)","你买彩妆最看重?(效果/成分/价格/包装/口碑)","你被哪类内容种草?(测评/教程/达人/朋友)","你更想看?(成分测评/平价替代/学生党妆容/手把手教程)","买前你会查成分吗?","你愿意试国货平替吗?顾虑是什么?","愿意做『7 天测评/改造体验官』吗?可留微信。"],
+   interview:["讲一次你踩雷或被种草化妆品的经历?","你最想解决的护肤/化妆难题是什么?","你怎么判断一个测评/教程可信?","选彩妆时价格和效果哪个更重要、底线多少?","你从哪里、被谁种草?最信任素人还是大博主?","对国货你的真实看法?","若同学真实改造你的妆容并教你,你愿意出镜吗?担心什么?"]},
+
+ 5:{code:"T5",track:"香氛",emoji:"🕯️",leader:24,accent:"#9C8BC9",
+   tagline:"为情绪与空间造香——疗愈经济的内容入口",
+   market:["家居香氛/情绪疗愈高速增长,香薰、蜡烛、扩香成为悦己+送礼刚需。","痛点:产品体验难线上传达,情绪价值需被讲出来;送礼/疗愈场景未被内容化。","机会:『情绪疗愈 + 生活方式 + 送礼』内容,低成本撬动复购。"],
+   sounding:["1) 拆『香薰/助眠/情绪疗愈/treat 自己』爆文结构;","2) 评论挖掘场景(失眠/分手/考试焦虑/送闺蜜);","3) 竞品价格-香型-场景矩阵;","4) 校园疗愈盲测 + 问卷。"],
+   data:["核心指标:疗愈话题互动、收藏率、场景转化、客单、连带、社群复购。","数据源:千瓜、新红、电商后台、疗愈活动登记。","判断:『情绪场景明确×互动高×转化好』的香型即主推。"],
+   viral:["引爆 = 情绪场景共鸣(『分手后我点了这支蜡烛』)× ASMR/治愈画面 × 1 个仪式动作。","真人 + 氛围画面 + 评论区『今天你需要哪种情绪』,引流疗愈社群。"],
+   model:["『情绪疗愈内容 IP + 私域社群 + 香氛选品/订阅』。","落地:校园疗愈/解压工作室,内容免费、选品分销、订阅+活动付费。","创新:『情绪订阅盒』+香调人格,把一次性消费变订阅复购。"],
+   profit:["① 香氛分销佣金;② 解压/疗愈套装;③ 月度情绪订阅盒;④ 线下疗愈快闪;⑤ B 端定制疗愈内容。"],
+   ten:["10 样品 = 10 款情绪香型。探测法:对应 10 种情绪场景做内容,收集共鸣与转化,锁定高复购情绪香型后放大。"],
+   zero:["手机拍氛围+剪映(ASMR)+Canva+社群;产品寄样分销,0 资金。"],
+   sampling:["分层:按性别×是否用香氛×情绪需求配额,问卷 100–150 份;","场景取样:期末/失恋墙/解压活动现场拦访登记;","深访 10 人:含『助眠/解压/送礼/仪式感』四类。"],
+   survey:["年级与性别?","你用过香薰/蜡烛/扩香吗?","买香氛预算区间?","你想用香氛解决什么?(助眠/解压/氛围/送礼)","什么场景你最需要『被治愈』?","你买香氛最看重?(气味/颜值/情绪/价格)","你会买来送人吗?送谁?","你被哪类内容打动过香氛?","你愿意订阅『每月一款情绪香』吗?","愿意做『情绪香体验官』吗?可留微信。"],
+   interview:["讲一次你需要被治愈、想要点支蜡烛的时刻?","那种情绪你通常怎么排解?","你买香氛是为自己还是送人、怎么挑?","你愿意为『稳定的情绪陪伴』每月花多少?","你从哪里被种草香氛?","订阅制(每月寄香)你会考虑吗?顾虑?","若有人为你定制情绪香单,你会试吗?"]},
+
+ 6:{code:"T6",track:"短视频",emoji:"📱",leader:15,accent:"#5BB4D9",
+   tagline:"出镜 + 矩阵 + 海外,把流量做成可复制的引擎",
+   market:["短视频是一切生意的流量入口,口播/出镜/海外 TikTok 红利仍在。","痛点:多数账号『有内容没体系』,起号慢、变现难、不可复制。","机会:把『选题-脚本-拍摄-剪辑-投放-变现』做成 SOP,可批量起号、对外接单。"],
+   sounding:["1) 拆对标赛道近一年 Top 账号起号路径与爆款选题;","2) 评论挖掘受众真实需求;","3) 用『关键词+蓝海象限』找低竞争高需求选题;","4) 海外用 TikTok Creative Center 看趋势 + 受众问卷。"],
+   data:["核心指标:涨粉速度、完播、互动率、爆款率、单粉变现、海外 CPM/RPM。","数据源:平台后台、TikTok Creative Center、自建选题-数据表。","判断:可复制的『选题模板+钩子结构』即固化为起号 SOP。"],
+   viral:["引爆 = 黄金 3s 钩子 × 强信息密度 × 平台算法契合 × 稳定更新节奏。","真人出镜/AI 数字人 + 矩阵同款 + 海外本地化复制,一鱼多吃。"],
+   model:["『矩阵起号 SOP + 内容代运营 + 海外账号 + 直播』。","落地:校园 MCN 工作室,自有矩阵 + 对外代运营,SOP 即核心资产。","创新:AI 数字人 + 工业化剪辑,1 人运营多账号,边际成本趋近 0。"],
+   profit:["① 账号矩阵广告/带货;② 企业号代运营;③ 海外账号联盟营销/创作者基金;④ 直播打赏/带货;⑤ 起号 SOP 课程。"],
+   ten:["10 样品 = 10 条不同钩子/形式测试视频。A/B 矩阵:同主题测 10 种开场,用完播+涨粉选最优模板,再批量复制起号。"],
+   zero:["手机+剪映+即梦数字人+免费配乐;海外用 CapCut;0 资金,先起号再变现。"],
+   sampling:["受众取样:对目标赛道 100 名用户做内容偏好问卷;","创作者取样:访谈 5 位已起号同学/校友复盘路径;","B 端取样:列 10 家想做账号的本地商家约访 3 家。"],
+   survey:["你常刷哪个平台?每天多久?","你关注账号通常因为?(有用/有趣/颜值/共鸣)","什么样的开场会让你停下?","你看完一条视频的关键是?","你会因视频下单/关注吗?什么打动你?","你更爱真人出镜还是图文/数字人?","你最想看哪类内容?","你刷到过海外内容吗?感觉如何?","你会想自己做账号吗?最大障碍?","愿意参与我们的内容共创/出镜吗?可留微信。"],
+   interview:["你最近沉迷的一个账号是什么、为什么?","你觉得它做对了什么?","(创作者)你起号最难的环节是什么?","哪条内容让你涨粉最多、为什么?","你怎么找选题、判断会不会火?","(B 端)你想用账号达成什么、预算多少?","若有一套可复制起号 SOP,你愿意学/合作吗?"]},
+
+ 7:{code:"T7",track:"动漫",emoji:"🎴",leader:31,accent:"#B98BD9",
+   tagline:"用二次元 IP 与同人共创,撬动年轻人的热爱与付费",
+   market:["中国二次元/谷子经济超千亿,Z 世代为热爱高频付费,IP 联名、漫展、谷子需求旺盛。","痛点:原创 IP 冷启动难、变现路径长;品牌想做二次元营销却缺懂圈层团队。","机会:『轻 IP 内容 + 同人共创 + 谷子/联名分销』可低成本启动并快速圈层裂变。"],
+   sounding:["1) 拆 B 站/抖音/小红书二次元爆款(角色/同人/cos/谷子开箱)结构;","2) 评论与弹幕挖掘圈层热词与付费点;","3) 竞品 IP 与谷子价格-题材矩阵;","4) 校园 ACG 社团调研 + 问卷。"],
+   data:["核心指标:内容互动/弹幕密度、同人共创量、谷子点击-转化、活动到场、社群活跃。","数据源:B 站后台、千瓜、社团登记、活动报名表。","判断:『圈层共鸣强×共创活跃×转化好』的 IP/题材即主推。"],
+   viral:["引爆 = 强角色设定/梗 × 圈层暗号 × 可参与的同人共创 × 漫展/线下话题。","出镜/动态漫 + 同人征集 + 评论区暗号互动,沉淀 ACG 社群。"],
+   model:["『轻 IP 内容 + 同人共创社群 + 谷子/联名分销 + 线下活动』。","落地:校园 ACG 内容+社群,内容免费、谷子分销、活动+联名付费。","创新:同人共创 UGC 反哺 IP,一次共创 = 一批内容 + 一次裂变 + 一次转化。"],
+   profit:["① 谷子/周边分销佣金;② 漫展/线下活动票务+摊位;③ 品牌二次元联名营销;④ 同人本/数字周边;⑤ 社群会员。"],
+   ten:["10 样品 = 10 款谷子/周边或 10 个角色内容。探测法:测不同 IP/题材的圈层反应与转化,锁定高热 IP 后集中共创放大。"],
+   zero:["手机/绘板+剪映+Canva+B 站/社群;谷子走分销/预售,0 资金启动。"],
+   sampling:["圈层取样:在 ACG 社团、漫展、B 站社群定向投放,问卷 100–150 份;","滚雪球:由核心同好转介,覆盖不同 IP 圈;","深访 10 人:含『重氪/手绘同人/cos/轻度』四类。"],
+   survey:["年级与性别?","你是哪类二次元?(轻度/中度/重氪)","每月在动漫/谷子上花多少?","你为哪些买单?(谷子/手办/同人/漫展/会员)","你为什么愿意为热爱花钱?","你常在哪看二次元内容?(B 站/抖音/小红书)","你参与过同人共创/cos 吗?","什么会让你为一个新 IP 上头?","你去过漫展吗?最想要什么体验?","愿意加入同好社群/参与共创吗?可留微信。"],
+   interview:["讲讲你最上头的一个 IP、为它花过最多的是什么?","当初是什么让你入坑的?","你怎么发现新 IP、被什么种草?","你愿意为周边/谷子花的上限是多少、看什么?","你参与过共创/同人吗?体验如何?","线下漫展对你意味着什么?","若有校园同好做 IP+共创+线下,你会加入吗?顾虑?"]}
+};
+const OPTIM={"1": {"offer": "21天早睡/护肝训练营", "price": 129, "cad": 45, "hook": "强钩子", "irat": 60, "buy": 2.69, "foll": 30739, "pd": 4176, "buyers": 112, "rev": 117353, "profit": 81857, "ltv": 135.4, "q": [6062, 21833, 47050, 81857], "path": [5983, 17452, 28917, 50539, 81857], "lift": 1268}, "2": {"offer": "品牌定制短片", "price": 8000, "cad": 45, "hook": "强钩子", "irat": 60, "buy": 0.21, "foll": 23889, "pd": 1623, "buyers": 3, "rev": 282588, "profit": 169263, "ltv": 12000.0, "q": [10531, 40271, 92172, 169263], "path": [1642, 5777, 12860, 85231, 169263], "lift": 10208}, "3": {"offer": "1V1选香服务", "price": 129, "cad": 45, "hook": "强钩子", "irat": 60, "buy": 1.97, "foll": 30163, "pd": 4439, "buyers": 88, "rev": 104709, "profit": 88713, "ltv": 219.3, "q": [5982, 22321, 49605, 88713], "path": [12298, 27222, 43366, 61614, 88713], "lift": 621}, "4": {"offer": "品牌种草合作", "price": 1500, "cad": 45, "hook": "强钩子", "irat": 60, "buy": 0.23, "foll": 40315, "pd": 5020, "buyers": 11, "rev": 202286, "profit": 121081, "ltv": 2700.0, "q": [7393, 28597, 65742, 121081], "path": [9693, 28345, 49846, 81581, 121081], "lift": 1149}, "5": {"offer": "情绪订阅盒", "price": 69, "cad": 45, "hook": "强钩子", "irat": 60, "buy": 3.91, "foll": 30523, "pd": 4492, "buyers": 176, "rev": 255008, "profit": 139965, "ltv": 265.7, "q": [5989, 27309, 70070, 139965], "path": [13685, 33178, 51379, 83307, 139965], "lift": 923}, "6": {"offer": "企业号代运营", "price": 2000, "cad": 45, "hook": "强钩子", "irat": 60, "buy": 0.21, "foll": 63643, "pd": 7204, "buyers": 15, "rev": 443324, "profit": 265705, "ltv": 4800.0, "q": [15968, 61670, 143019, 265705], "path": [16823, 45599, 80397, 150028, 265705], "lift": 1479}, "7": {"offer": "品牌二次元联名", "price": 2500, "cad": 45, "hook": "强钩子", "irat": 60, "buy": 0.21, "foll": 37401, "pd": 5927, "buyers": 13, "rev": 368795, "profit": 202547, "ltv": 4125.0, "q": [12427, 47718, 109793, 202547], "path": [12172, 39766, 69994, 126730, 202547], "lift": 1564}};
+/* 金奖商业计划书(9 段,对标三创/互联网+) */
+const BP = {
+ 1:{name:"大健康 · 校园情绪养生内容电商",s:[
+  "【一、执行摘要】面向 18–28 岁『朋克养生』人群,以情绪化健康内容获客、私域社群承接、轻产品与轻课变现,打造可在高校零成本复制的健康内容电商。首年目标:矩阵粉丝 10w+,私域 5000+,营收 30–50 万。",
+  "【二、行业与市场】大健康 2030 年破 16 万亿,年轻客群被传统保健品忽视。睡眠、护肝、解压、女性健康为高增长细分;校园决策快、复购高、口碑强。",
+  "【三、产品与服务】① 免费健康内容(科普+测评);② 9.9–49 元体验装;③ 99–199 元 21 天早睡/护肝训练营;④ 私域会员。技术:AI 选题+数据看板+内容 SOP。",
+  "【四、商业模式】内容获客→私域沉淀→轻产品/服务变现→UGC 反哺内容的飞轮。供应链走品牌分销/寄样,轻资产、现金流为正。",
+  "【五、营销推广】反常识钩子短视频 + 街访/深访视频 + 体验官 UGC + 校园社群裂变 + 评论区领清单沉淀私域;以『校园健康内容工作室』背书。",
+  "【六、运营落地】依托东华,工作室制,6 人分工(统筹/研究数据/策略/科普/制作/校企)。以 10 样品体验官计划做 MVP 验证后放大。",
+  "【七、财务分析】启动<2000 元;收入=分销佣金+体验装+训练营+会员;毛利 50%+,3 个月回本,首年 30–50 万,可规模化至多校。",
+  "【八、团队】组长王雨欣(团支部书记·项目管理)+陈宇凡(大广赛全国金·研究)+刘鸣远(策略)+于明琢(深度科普)+夏菡谦(AI 制作)+王青芳(薇诺娜·校企)。",
+  "【九、风险与规划】风险:健康宣称合规、平台政策→严守广告法、只做体验与科普、产品由品牌背书。规划:Y1 单校→Y2 多校联盟→Y3 区域校园健康 MCN。社会价值:提升年轻人健康素养。"]},
+ 2:{name:"短片电影 · AI 高性价比精品短片工作室",s:[
+  "【一、执行摘要】以 AI 辅助+学生剧组,为品牌/文旅/政企提供『有质感且能传播』短片,单片成本为行业 1/5、周期 7–10 天。首年:交付 20+ 短片,营收 30–60 万,孵化 1 个自有 IP。",
+  "【二、行业与市场】微短剧超 500 亿,品牌定制/文旅/招募短片需求爆发,中小预算市场缺『精品又便宜』供给,高校人才正好卡位。",
+  "【三、产品与服务】① 品牌/文旅定制短片;② 自有 IP 短片;③ 短片 SOP/模板课程;④ 版权二次授权。技术:AI 分镜+AI 配音+学生实拍。",
+  "【四、商业模式】『作品即获客』:用代表作换商单,定制为主营收,IP 与课程为第二曲线,版权为长尾。",
+  "【五、营销推广】高光切片二次传播 + 客户访谈/幕后视频 + 案例集 + 校企/MCN BD;以《红布》级视听语法建立质感口碑。",
+  "【六、运营落地】工作室制,6 人分工(统筹数据/导演/编剧/主演/剪辑/AI 制作);10 样品=多版本切片 A/B 选最优,作为商单数据证据。",
+  "【七、财务分析】启动<1500 元;单片报价 0.5–3 万,毛利 60%+;首年 20+ 单、30–60 万;边际成本随 SOP 与 AI 下降。",
+  "【八、团队】组长徐冰玥(学习委员·AI 短片统筹)+张焉然(拜耳/泡泡玛特国奖·导演)+倪润杰(编剧)+马雨欣(主演)+赵雪缘(大广赛铜奖·剪辑)+冯淑焱(Havas·AI 视听)。",
+  "【九、风险与规划】风险:交付质量与版权→SOP 标准化+合同规范。规划:Y1 接单→Y2 自有 IP 分账→Y3 区域精品短片厂牌。社会价值:为城市与品牌沉淀影像资产、培养青年影像人才。"]},
+ 3:{name:"香水 · 校园香水内容 IP 与圈层买手",s:[
+  "【一、执行摘要】以场景化香水内容种草、嗅觉测评裂变、私域圈层承接,做小众香水的内容买手生意,低成本撬动高客单。首年:粉丝 8w+,私域 3000+,营收 25–45 万。",
+  "【二、行业与市场】香水年增 20%+,Z 世代悦己崛起,沙龙香高增长;消费者『不知道适合自己的味道』,内容种草+试香是最佳获客路径。",
+  "【三、产品与服务】① 香水分销/买手;② 试香盲盒套装;③ 1V1 选香服务;④ 品牌定制内容;⑤ 圈层会员。工具:香调人格测评 H5+数据看板。",
+  "【四、商业模式】内容种草→试香转化→私域圈层→分销/定制变现,轻资产、高连带、强复购。",
+  "【五、营销推广】场景化爆文 + 试香台街访视频 + 香调人格测评裂变 + 评论区试香福利沉淀私域。",
+  "【六、运营落地】买手/测评工作室,7 人分工(统筹运营/研究/SKU 数据/深访私域/摄影/视觉文案/剧宣物料);10 样品覆盖 5 香调做测评锁定爆品。",
+  "【七、财务分析】启动<2000 元;收入=佣金+套装+选香服务+B 端内容;毛利 45%+,首年 25–45 万。",
+  "【八、团队】组长熊涵怡(团支书·品牌全案)+吴梦畅(国奖大创·研究)+邓伊利(大广赛省奖·SKU 数据)+廖亦琛(小红书私域·深访)+畅嘉成(商业摄影)+卢怡清(大广赛美妆平面·文案)+孟恩(剧宣物料)。",
+  "【九、风险与规划】风险:正品与价格体系→品牌直供+合规。规划:Y1 单品类→Y2 多香调矩阵→Y3 校园香氛买手平台。社会价值:提升嗅觉美学与理性消费。"]},
+ 4:{name:"化妆品 · 校园美妆测评与 KOC 矩阵",s:[
+  "【一、执行摘要】以真实测评+教程内容建立信任,组建校园 KOC 矩阵为国货美妆做高信任低价种草与分销。首年:矩阵粉丝 12w+,KOC 30+,营收 30–55 万。",
+  "【二、行业与市场】国货美妆崛起,成分党/平价替代/学生党妆容旺盛;品牌缺真实校园场景内容、KOL 投放贵,KOC 矩阵是刚需。",
+  "【三、产品与服务】① 好物分销;② 品牌种草/探店;③ 妆容教程付费合集;④ KOC 矩阵代运营;⑤ 线下活动。技术:数据选品+内容 SOP。",
+  "【四、商业模式】测评/教程内容→KOC 矩阵放大→分销+品牌合作变现;素人改造计划提供最强带货素材。",
+  "【五、营销推广】前后效果对比+平价反差+可照做步骤 + 素人改造街访视频,KOC 同款选题批量复制裂变。",
+  "【六、运营落地】KOC 联盟工作室,6 人分工(统筹艺术/研究问卷/深访数据/导演/数据可视化/取样运营);10 样品=10 位素人 7 天测评锁定爆品。",
+  "【七、财务分析】启动<1500 元;收入=佣金+品牌合作+教程+代运营;毛利 50%+,首年 30–55 万。",
+  "【八、团队】组长陈思源(班长·融媒体)+黄思语(大广赛微电影国奖·研究)+陈沁雪(MAXMARA/罗德·深访)+郑璐宜(大广赛全国金·导演)+列吉卓嘎(3D 视觉)+刘奕伶(全链路·数据)。",
+  "【九、风险与规划】风险:虚假宣传→只做真实测评+合规挂车。规划:Y1 矩阵→Y2 跨校 KOC 联盟→Y3 美妆 KOC MCN。社会价值:理性护肤教育、青年内容创业。"]},
+ 5:{name:"香氛 · 情绪疗愈香氛订阅",s:[
+  "【一、执行摘要】以情绪疗愈内容获客、私域社群承接,做香氛『情绪订阅盒』,把一次性消费变订阅复购。首年:粉丝 8w+,订阅 1000+,营收 25–45 万。",
+  "【二、行业与市场】家居香氛/情绪疗愈高增长,悦己+送礼刚需;产品体验难线上传达,情绪价值需被讲出来,内容是最佳入口。",
+  "【三、产品与服务】① 香氛分销;② 解压疗愈套装;③ 月度情绪订阅盒;④ 线下疗愈快闪;⑤ B 端疗愈内容。工具:情绪香调人格+订阅系统。",
+  "【四、商业模式】情绪内容→私域社群→订阅+分销变现,订阅带来稳定复购与现金流。",
+  "【五、营销推广】情绪共鸣短视频 + 失恋墙/解压现场街访视频 + ASMR 治愈画面 + 评论区情绪互动沉淀社群。",
+  "【六、运营落地】疗愈/解压工作室,6 人分工(统筹公关深访/研究数据/数据问卷/文案/视频化/监制);10 样品对应 10 种情绪场景锁定高复购香型。",
+  "【七、财务分析】启动<1500 元;收入=订阅+套装+佣金+活动+B 端;毛利 50%+,首年 25–45 万,订阅 LTV 高。",
+  "【八、团队】组长李一彤(班长·国际公关·深访)+刘子涵(统计学·研究数据)+邱可嘉(SHEIN·增长数据)+江仪斐(华人作文全国一等·文案)+蔡佳辰(品牌整合·视频)+孙楚乔(监制导演)。",
+  "【九、风险与规划】风险:订阅留存→内容+情绪运营提升黏性。规划:Y1 订阅→Y2 礼赠/企业团购→Y3 情绪疗愈生活方式品牌。社会价值:情绪健康关怀。"]},
+ 6:{name:"短视频 · 校园矩阵起号 SOP 与代运营",s:[
+  "【一、执行摘要】把短视频全流程做成可复制 SOP,自建矩阵+对外代运营+海外账号。首年:矩阵 20+ 账号、总粉 30w+,营收 35–60 万。",
+  "【二、行业与市场】短视频是一切生意流量入口,口播/出镜/海外 TikTok 红利仍在;多数账号有内容没体系,SOP 化是核心壁垒。",
+  "【三、产品与服务】① 自有矩阵广告/带货;② 企业号代运营;③ 海外账号联盟营销;④ 直播;⑤ 起号 SOP 课程。技术:AI 数字人+工业化剪辑+选题库。",
+  "【四、商业模式】SOP 驱动批量起号→矩阵变现+代运营,AI 让 1 人运营多号、边际成本趋近 0。",
+  "【五、营销推广】黄金 3s 钩子+强信息密度 + 受众/创作者访谈视频 + 矩阵同款 + 海外本地化复制,一鱼多吃。",
+  "【六、运营落地】校园 MCN 工作室,6 人分工(统筹出镜/研究数据工具/数据问卷/国际深访出镜/海外/视频化);10 样品=10 种钩子 A/B 选最优模板。",
+  "【七、财务分析】启动<1000 元;收入=广告带货+代运营+海外基金+直播+课程;毛利 60%+,首年 35–60 万。",
+  "【八、团队】组长甘书宇(支部书记·出镜)+郭心源(全栈·研究数据工具)+马婧雯(大广赛微电影·数据)+喜丽(苏里南籍·国际深访)+张冯育良(Sora·海外)+阮前程(AI 数字人·视频化)。",
+  "【九、风险与规划】风险:平台规则/账号安全→合规+多平台分散。规划:Y1 矩阵+代运营→Y2 海外规模化→Y3 校园 MCN 厂牌。社会价值:数字内容创业能力普及。"]},
+ 7:{name:"动漫 · 校园轻 IP 与同人共创社群",s:[
+  "【一、执行摘要】以轻二次元 IP 内容+同人共创社群+谷子/联名分销,撬动 Z 世代为热爱付费。首年:社群 5000+,共创作者 200+,营收 25–45 万。",
+  "【二、行业与市场】二次元/谷子经济超千亿,Z 世代高频付费;原创 IP 冷启动难、品牌缺懂圈层团队,轻 IP+共创可低成本破圈。",
+  "【三、产品与服务】① 谷子/周边分销;② 漫展/线下活动;③ 品牌二次元联名营销;④ 同人本/数字周边;⑤ 社群会员。工具:共创平台+数据看板。",
+  "【四、商业模式】轻 IP 内容→同人共创裂变→谷子分销+活动+联名变现,UGC 反哺 IP。",
+  "【五、营销推广】强角色设定/梗 + 漫展/社团街访视频 + 圈层暗号 + 同人征集,沉淀 ACG 社群。",
+  "【六、运营落地】校园 ACG 内容+社群工作室,7 人分工(统筹舆情研究/数据问卷/公关深访/圈层取样 IP/视频化全能/AI 数据/二次元视效);10 样品测不同 IP 锁定高热题材。",
+  "【七、财务分析】启动<1500 元;收入=谷子佣金+活动+联名+周边+会员;毛利 45%+,首年 25–45 万。",
+  "【八、团队】组长叶佳渝(班长·舆情研究)+王卓然(百度 AI·数据问卷)+赵一茜(国际公关·深访)+励潇霖(潮流 IP·圈层取样)+包婧怡(大广赛策划省奖·全能视频化)+万嫣然(AI 数字人·数据)+姚炘彤(二次元视效)。",
+  "【九、风险与规划】风险:IP 版权与圈层口碑→原创+授权合规、尊重圈层。规划:Y1 社群+谷子→Y2 自有 IP+联名→Y3 校园二次元厂牌。社会价值:青年文化原创与表达。"]}
+};
+
+/* 44 名学员(#26 缺考)。res=1 表示市场调研核心岗。 */
+const PEOPLE = [{"n": 1, "name": "陈沁雪", "sid": "220200402", "cls": "时传2201", "g": 4, "res": 1, "tag": ["毕业", "大厂背景"], "role": "深度访谈(KOL/用户)& 数据复盘 & KOL 商务", "str": "MAXMARA/罗德/CROCS 大厂,50+KOL 商务落地,Python/数据。", "tasks": ["主持化妆品用户与 KOL 深度访谈,挖掘真实痛点与种草链路", "统计投放与销售数据,输出竞品分析与复盘 PPT", "搭建 KOL/KOC 画像与投放矩阵,负责谈判与核销", "把 KOL/用户访谈剪成『行业真心话』短视频引流私域"]}, {"n": 2, "name": "邓伊利", "sid": "220200405", "cls": "时传2201", "g": 3, "res": 1, "tag": ["毕业", "大广赛省奖"], "role": "竞品 SKU 数据 & 问卷分析", "str": "大广赛策划省奖,2.1w+ 小红书爆款,300+ 竞品 SKU 对标。", "tasks": ["整理 50 款香水竞品价格-香调-卖点矩阵找空隙", "设计并回收香水问卷,做交叉分析与定价建议", "拆解小红书爆文选题与种草结构", "跟踪电商大促与转化数据复盘"]}, {"n": 3, "name": "刘奕伶", "sid": "220200409", "cls": "时传2201", "g": 4, "res": 1, "tag": ["毕业", "大四"], "role": "数据分析 & 取样统筹 & 全链路运营", "str": "顶尖大厂高阶操盘,数据驱动思维,全链路运营。", "tasks": ["统筹化妆品调研取样配额与进度", "搭建矩阵全链路数据看板与转化漏斗", "管理好物分销链路与 KOC 内容产能", "做月度数据复盘与增长策略"]}, {"n": 4, "name": "吴梦畅", "sid": "220200415", "cls": "时传2201", "g": 3, "res": 1, "tag": ["毕业", "国奖大创"], "role": "研究负责人 · 市场摸底 & 申报书主笔", "str": "专业第一保研 985,大广赛省三/国奖大创,融媒采编。", "tasks": ["主导香水赛道零成本摸底(爆文拆解+评论挖掘+问卷+深访设计)", "建立结构化数据库与痛点萃取报告", "撰写赛道商业计划书/大创申报书主体", "统一调研口径并培训组员执行"]}, {"n": 5, "name": "蔡佳辰", "sid": "220730309", "cls": "时传2201", "g": 5, "res": 1, "tag": ["毕业", "全链路"], "role": "访谈视频化 & 音视频 & 全链路", "str": "音视频内容创作+品牌整合营销+新媒体全链路。", "tasks": ["把香氛街访/疗愈深访剪成 ASMR 治愈短视频引流", "负责音视频创作与跨平台分发", "搭建内容-社群-转化全链路 SOP", "协调订阅盒选品与上新节奏"]}, {"n": 6, "name": "孟恩", "sid": "220730309", "cls": "时传2201", "g": 3, "res": 0, "tag": ["毕业", "剧宣"], "role": "访谈视频化 & 剧宣级物料 & 编导摄", "str": "顶尖大厂剧宣实战,单项 80w+ 赞物料,编导与摄影。", "tasks": ["把试香台街访剪成高质感种草短视频", "产出香水赛道海报与视觉物料", "负责拍摄分镜与现场导演", "策划达人级 PR 话题与发布节奏"]}, {"n": 7, "name": "陈宇凡", "sid": "230200103", "cls": "时传2301", "g": 1, "res": 1, "tag": ["大广赛全国金"], "role": "研究负责人 · 市场调研 & 策略中枢", "str": "字节飞书商业化,东方卫视执行导演,大广赛全国金(主攻调研)。", "tasks": ["主导大健康赛道摸底与竞品/痛点研究", "用算数/千瓜/微信指数锁定上升细分", "建立投放数据回收与诊断看板", "输出赛道策略与选题方向,统一调研口径"]}, {"n": 8, "name": "郑璐宜", "sid": "230200120", "cls": "时尚传播2301", "g": 4, "res": 0, "tag": ["大广赛全国金"], "role": "访谈拍摄导演 & 爆款内容主创", "str": "字节飞书商业化,东方卫视一年执行导演,大广赛全国金。", "tasks": ["执导化妆品街访/素人改造拍摄,把调研拍成爆款", "设计教程/测评内容脚本与拍摄标准", "把控内容质感与节奏", "带教 KOC 矩阵内容生产"]}, {"n": 9, "name": "励潇霖", "sid": "230200126", "cls": "时尚传播2301", "g": 7, "res": 1, "tag": ["潮流文化"], "role": "圈层取样 & 潮流 IP & 艺人资源", "str": "Live Nation 拉资背书,YouTube 18w+ 宣发,潮流视野。", "tasks": ["在 ACG 社团/漫展做圈层取样与滚雪球招募", "策划动漫潮流/青年文化内容与 IP 包装", "对接艺人/达人项目与联名资源", "设计圈层裂变活动"]}, {"n": 10, "name": "陈思源", "sid": "230200202", "cls": "时传2301", "g": 4, "res": 0, "tag": ["班长", "组长G4", "融媒体"], "role": "组长 · 融媒体统筹 & 调研统筹 & BP 主笔", "str": "澎湃/上视实习,AI 心理项目负责人,融媒体视听主创,英语竞赛国奖。", "tasks": ["统筹 G4 化妆品项目管理与调研排期", "担任内容艺术指导,把控整体调性", "主笔化妆品赛道金奖商业计划书", "对接校企资源,主持复盘"]}, {"n": 11, "name": "张焉然", "sid": "230200221", "cls": "时传2301", "g": 2, "res": 0, "tag": ["拜耳国奖", "泡泡玛特国奖"], "role": "导演 & 客户访谈拍摄 & 视觉统筹", "str": "SMG 实习导演,拜耳大健康国奖,泡泡玛特国奖,美妆快消 AE。", "tasks": ["执导短片及客户/观众访谈拍摄", "设计短片视觉语法(留白/色彩/构图)", "把控拍摄现场与画面质感", "输出可复用分镜与视觉模板"]}, {"n": 12, "name": "畅嘉成", "sid": "230200224", "cls": "时尚传播2301", "g": 3, "res": 0, "tag": ["商业摄影"], "role": "访谈拍摄 & 商业摄影 & 明星级 PR", "str": "索尼 a7 摄影,大广赛省二导演,侯明昊直播策划。", "tasks": ["拍摄香水试香台街访与高奢视觉", "负责调色与高级感海报", "统筹达人级线上 PR", "把控香水内容画面美学"]}, {"n": 13, "name": "郭心源", "sid": "230200407", "cls": "时尚传播2301", "g": 6, "res": 1, "tag": ["全栈技术", "AI/3D"], "role": "研究负责人 · 数据看板 & 工具开发", "str": "Prada 高奢数据分析,Python/小程序全栈,AI 3D/网页,CET-6。", "tasks": ["搭建短视频数据看板与选题分析工具", "开发问卷/裂变 H5 与自动化脚本", "用 AI 3D/生视频提升内容产能", "负责技术中台与调研数据治理"]}, {"n": 14, "name": "黄思语", "sid": "230200407", "cls": "时传2301", "g": 4, "res": 1, "tag": ["大广赛微电影国奖"], "role": "研究负责人 · 市场调研 & 问卷设计", "str": "AE 调研思维+内容落地,资深秀米排版,大广赛微电影国奖。", "tasks": ["主导化妆品市场调研与竞品对标", "设计问卷与新媒体全案、投放策略", "负责秀米/Canva 视觉排版", "建立 UGC 数据追踪表"]}, {"n": 15, "name": "甘书宇", "sid": "230200424", "cls": "传播学", "g": 6, "res": 1, "tag": ["支部书记", "组长G6", "出镜艺人"], "role": "组长 · 出镜采访主播 & 直播运营 & BP 主笔", "str": "男团出镜艺人,东方卫视春晚群演,23w+ 赞小红书操盘,110w 级。", "tasks": ["统筹 G6 矩阵起号 SOP 与排期", "担任街访出镜主持与直播运营", "设计口播/出镜爆款模板", "主笔短视频赛道金奖商业计划书"]}, {"n": 16, "name": "阮前程", "sid": "", "cls": "时尚传播", "g": 6, "res": 1, "tag": ["AI数字人", "广电剪辑"], "role": "访谈视频化 & AI 数字人 & 矩阵剪辑", "str": "高赞自媒体矩阵,AI 数字人/广电级剪辑硬核技术。", "tasks": ["把受众/创作者访谈剪成口播短视频", "用 AI 数字人批量生产内容", "负责矩阵账号工业化剪辑", "设计多账号一鱼多吃复制流程"]}, {"n": 17, "name": "马雨欣", "sid": "230250308", "cls": "时传2301", "g": 2, "res": 1, "tag": ["出镜演员"], "role": "出镜采访 & 主演 & 快剪", "str": "颜值表现力+硬核技术,170cm,融媒 20w+ 快剪,20 分钟极速出片。", "tasks": ["担任街访/观众采访出镜主持", "担任短片主演与现场拍摄", "负责快剪切片与花絮", "协助选角与表演指导"]}, {"n": 18, "name": "廖亦琛", "sid": "231220113", "cls": "时传2301", "g": 3, "res": 1, "tag": ["小红书私域"], "role": "深度访谈 & 小红书私域 & 社群裂变", "str": "罗德公关数据流,Vibing 千人社群主理,小红书爆款捕手。", "tasks": ["主持香水玩家/送礼者深度访谈", "运营私域社群与圈层裂变", "负责小红书爆款选题与投放", "设计试香福利与裂变机制并跟踪复购"]}, {"n": 19, "name": "王青芳", "sid": "220200210", "cls": "传播2201", "g": 1, "res": 1, "tag": ["毕业", "薇诺娜营销"], "role": "问卷设计与投放 & 校企取样 & 全案", "str": "薇诺娜营销策划,美团 HRBP,大广赛策划案省奖,轻养生大健康。", "tasks": ["设计大健康问卷并组织校园分层投放回收", "对接校企/品牌合作与体验官取样", "撰写赛道全案策划与项目书", "负责活动与团队流程管理"]}, {"n": 20, "name": "刘子涵", "sid": "", "cls": "传播2201", "g": 5, "res": 1, "tag": ["毕业", "统计学"], "role": "研究负责人 · 数据分析 & 项目运营", "str": "传播学+统计学复合型,新媒体内容,数据分析,标书协助。", "tasks": ["搭建香氛问卷与统计分析体系(交叉/显著性)", "负责项目执行统筹与进度管理", "协助标书/申报书与行业报告", "做舆情与情绪需求数据研究"]}, {"n": 21, "name": "冯淑焱", "sid": "220200407", "cls": "传播2202", "g": 2, "res": 1, "tag": ["毕业", "Havas", "AI视听"], "role": "千瓜数据 & AI 视听制作 & 影视全流程", "str": "Havas 中国 AE,千瓜/小红书专家,DeepSeek/ChatGPT 重度,AI 视听。", "tasks": ["用千瓜做短片市场与竞品数据分析", "用 AI 大模型做创意与生视频", "负责拍摄/剪辑/调色全流程", "设计 AI 辅助提效工作流"]}, {"n": 22, "name": "列吉卓嘎", "sid": "220250327", "cls": "传播2202", "g": 2, "res": 1, "tag": ["毕业", "3D建模"], "role": "问卷/竞品调研 & 剪辑，执行制片", "str": "独特民族/跨文化审美,3D 建模+影视全栈(Blender/3ds Max)。", "tasks": ["负责短片竞品调研与观众问卷", "执行制片、负责精剪与创意剪辑", "制作高光切片用于二次传播", "协助多平台代运营"]}, {"n": 23, "name": "喜丽", "sid": "", "cls": "传播学(2023-2027)", "g": 6, "res": 1, "tag": ["苏里南籍", "播音"], "role": "深度访谈主持 & 国际化出镜 & Vlog", "str": "苏里南籍跨国,广播电台播音员,2025 上海暑期学校非遗创新。", "tasks": ["以播音功底主持受众深度访谈", "担任短视频国际化出镜与双语 Vlog", "负责出海内容创意叙事与本地化", "对接国际化传播资源"]}, {"n": 24, "name": "李一彤", "sid": "", "cls": "传播2302", "g": 5, "res": 1, "tag": ["班长", "组长G5", "国际公关"], "role": "组长 · 深度访谈主持 & 国际公关 & BP 主笔", "str": "罗德公关/Inditex 运营,2 万元+ 赞助外联主席,音乐剧社长,千人级活动。", "tasks": ["统筹 G5 香氛项目管理与调研排期", "主持情绪疗愈深度访谈、负责公关", "主笔香氛赛道金奖商业计划书", "对接订阅与活动资源,主持复盘"]}, {"n": 25, "name": "熊涵怡", "sid": "230200116", "cls": "传播2301", "g": 3, "res": 1, "tag": ["团支书", "组长G3", "品牌全案"], "role": "组长 · 品牌调研统筹 & 全平台运营 & BP 主笔", "str": "全平台新媒体运营+品牌全案+团队统筹执行复合型管理。", "tasks": ["统筹 G3 香水项目管理与调研排期", "主导前期市场/品牌调研与数据复盘", "主笔香水赛道金奖商业计划书", "负责全平台账号运营与团队管理"]}, {"n": 27, "name": "刘鸣远", "sid": "230200127", "cls": "传播2301", "g": 2, "res": 1, "tag": ["大广赛策划省奖"], "role": "深度访谈(客户/观众)& 编剧 & 采编，短片电影摄影", "str": "4A 广告策略视野+硬核受众洞察,大广赛策划省奖,三九胃泰操盘。", "tasks": ["以辩论逻辑主持客户/观众深度访谈", "负责短片剧本创作与故事结构", "参与采编与文本打磨", "摄影、剪辑与叙事节奏"]}, {"n": 28, "name": "包婧怡", "sid": "230200201", "cls": "传播2301", "g": 7, "res": 1, "tag": ["大广赛策划省奖", "编导演摄全能"], "role": "访谈视频化 & 全能创作 & 商业模式", "str": "电通 4A 策略组,大广赛策划省奖,商业模式探索,编导演摄单兵作战。", "tasks": ["把漫展/社团街访剪成圈层短视频", "担任动漫内容全能创作主力(编导演摄)", "设计动漫商业模式与变现路径", "支持前期调研与创意策划"]}, {"n": 29, "name": "夏菡谦", "sid": "230200214", "cls": "传播2301", "g": 1, "res": 1, "tag": ["剪辑", "AI"], "role": "访谈视频化 & 剪辑 & AI 内容", "str": "文案+剪辑+AI 三位一体,导演一体拍摄,零预算项目。", "tasks": ["把校园健康街访剪成高能短视频引流", "负责短视频剪辑与 AI 辅助创作", "承接零预算高效内容生产", "设计内容模板提高产能"]}, {"n": 30, "name": "姚炘彤", "sid": "230200219", "cls": "传播2301", "g": 7, "res": 0, "tag": ["英法双语", "视效"], "role": "访谈视频后期 & 二次元编导 & 视效", "str": "英法双语+前期编导+后期视效全渠道制作,SMG 文广新媒体实习。", "tasks": ["负责动漫访谈/共创视频的后期与特效", "担任二次元内容编导与动态漫", "参与双语国际化内容", "把控二次元视觉风格"]}, {"n": 31, "name": "叶佳渝", "sid": "230200220", "cls": "传播2301", "g": 7, "res": 1, "tag": ["班长", "组长G7", "舆情数据"], "role": "组长 · 舆情研究 & 深访统筹 & BP 主笔", "str": "大厂舆情数据洞察,ESFJ 超强社交,无印良品 KOL 赛事,SMG 新媒体运营。", "tasks": ["统筹 G7 动漫项目管理与调研排期", "负责舆情/弹幕监测与深访组织", "主笔动漫赛道金奖商业计划书", "对接联名/活动资源,主持复盘"]}, {"n": 32, "name": "赵一茜", "sid": "230200222", "cls": "传播学", "g": 7, "res": 1, "tag": ["国际公关", "卫视操盘"], "role": "深度访谈主持 & 国际公关 & 内容操盘", "str": "国际顶级 4A 公关商业洞察+千万级卫视媒体操盘。", "tasks": ["主持动漫核心同好深度访谈与圈层洞察", "负责品牌联名公关与商业洞察", "统筹大型活动与媒体投放", "对接 B 端联名客户"]}, {"n": 33, "name": "倪润杰", "sid": "230200226", "cls": "传播2301", "g": 1, "res": 1, "tag": ["编剧", "广电剪辑"], "role": "深度访谈主持 & 商业模式 & 受众策略", "str": "广电级 SMG 剪辑,文史哲底蕴,辩论队硬核逻辑,深度剧本。", "tasks": ["主持大健康用户深度访谈,做受众洞察", "设计商业模式与盈利模型(画布+单位经济)", "参与《红布》剧组策略支持", "输出策略框架与选题方向"]}, {"n": 34, "name": "江仪斐", "sid": "230200305", "cls": "传播2301", "g": 5, "res": 1, "tag": ["华人作文全国一等", "海外投放"], "role": "问卷/访谈提纲文案 & 海外投放", "str": "国家级文字功底+国际化海外投放视野,英语六级 597,华人作文全国一等。", "tasks": ["撰写香氛问卷与深访提纲、确保措辞中立", "负责高阶文案与情绪叙事", "设计海外/双语内容与投放", "把控文字质量与品牌调性"]}, {"n": 35, "name": "卢怡清", "sid": "230200308", "cls": "传播2302", "g": 3, "res": 1, "tag": ["大广赛美妆平面"], "role": "问卷文案 & 美妆视觉 & 品牌文案", "str": "严谨文字逻辑+美妆时尚视觉转化,大广赛美妆平面队长,英语翻译省奖。", "tasks": ["设计香水问卷措辞与视觉化呈现", "提炼品牌核心诉求与高阶文案", "负责视觉海报与品牌包装、香调可视化", "内容质量校对把控"]}, {"n": 36, "name": "孙楚乔", "sid": "230200313", "cls": "传播2302", "g": 5, "res": 0, "tag": ["监制导演", "AI视听"], "role": "访谈拍摄导演 & 监制 & AI 视听", "str": "精通 AI 视听前沿技术+高阶影视编导的监制导演型操盘。", "tasks": ["执导香氛深访/疗愈现场拍摄", "担任监制导演把控整体主题", "负责 AI 视听内容与疗愈氛围", "设计内容制作标准并带教"]}, {"n": 37, "name": "万嫣然", "sid": "230200xxx", "cls": "传播2302", "g": 7, "res": 1, "tag": ["AI数字人", "新浪娱乐百万"], "role": "数据分析 & AI 数字人 & 图生视频", "str": "网感数据思维+主流媒体严谨度,AI 数字人生成,图生视频,新浪娱乐百万操盘。", "tasks": ["负责动漫数据复盘与网感洞察", "用 AI 数字人/图生视频制作短视频", "设计交互式内容形式", "辅助 AI 创作与产能提升"]}, {"n": 38, "name": "王雨欣", "sid": "", "cls": "传播2302", "g": 1, "res": 1, "tag": ["团支部书记", "组长G1", "项目管理"], "role": "组长 · 问卷/访谈统筹 & 内容策划 & BP 主笔", "str": "内容策划+新媒体运营+赛事项目管理型,团区委公众号,薪火工作室组织部。", "tasks": ["统筹 G1 大健康项目管理与调研排期", "主笔大健康赛道金奖商业计划书与申报", "组织问卷投放与体验官计划", "负责内容策划与公众号运营"]}, {"n": 39, "name": "张冯育良", "sid": "230200321", "cls": "传播2302", "g": 6, "res": 1, "tag": ["Sora", "海外百万"], "role": "海外受众数据 & TikTok/Ins & Sora 工业化", "str": "百万海外级流量操盘,Sora 大模型全能,4000+ 全球红人矩阵。", "tasks": ["用 TikTok Creative Center 做海外受众数据", "负责海外起号与算法、Sora 工业化内容", "对接海外 KOL 矩阵与联盟营销", "设计出海本地化复制流程"]}, {"n": 40, "name": "赵雪缘", "sid": "230200323", "cls": "传播2302", "g": 4, "res": 1, "tag": ["大广赛微电影铜奖"], "role": "数据可视化 & 3D / 民族跨界视觉", "str": "4A 公关媒介实习,大广赛微电影铜奖,Pr 创意剪辑,竞品调研分析。", "tasks": ["把调研数据做成可视化图表与报告", "为化妆品内容制作 3D/动效视觉", "负责跨界/民族风格创意包装", "参与影视化拍摄与建模"]}, {"n": 41, "name": "于明琢", "sid": "230200330", "cls": "传播2302", "g": 1, "res": 1, "tag": ["B站", "深度长文"], "role": "数据可视化 & 深度科普长文", "str": "B 站原住民,微信长文深度主笔,数据可视化,Pr 非真人混剪,文史考据。", "tasks": ["把调研数据做成可视化图表与科普长文", "负责 B 站中长视频与非真人混剪", "沉淀长文科普选题库", "支撑赛道数据分析"]}, {"n": 42, "name": "王卓然", "sid": "", "cls": "传播学(辅修数字媒体艺术)", "g": 7, "res": 1, "tag": ["百度AI", "爆款网文"], "role": "问卷/数据 & 大厂 AI 产品 & 爆款网文", "str": "百度 AI 产品运营,20 万字高热度网文写手,小红书 20w+ 低粉爆文。", "tasks": ["设计动漫问卷并做数据建模分析", "负责 IP 故事/网文与爆款文案", "用 AI 产品思维优化内容生产", "参与 IP 世界观搭建"]}, {"n": 43, "name": "徐冰玥", "sid": "", "cls": "传播2302", "g": 2, "res": 1, "tag": ["学习委员", "组长G2", "AI短片统筹"], "role": "组长 · 数据分析 & AI 短片统筹 & BP 主笔", "str": "AI 短片内容统筹+数据分析型新媒体运营+项目执行管理。", "tasks": ["统筹 G2 短片项目管理与调研排期", "负责数据分析、AI 短片脚本统筹", "主笔短片赛道金奖商业计划书", "建立短片数据分析与商单提案"]}, {"n": 44, "name": "马婧雯", "sid": "230400105", "cls": "传播2302", "g": 6, "res": 1, "tag": ["大广赛微电影奖"], "role": "问卷/数据 & 短视频全流程 & 增长", "str": "短视频全流通(采写编评),大广赛微电影获奖,话剧引流操盘。", "tasks": ["负责短视频受众问卷与数据分析", "负责全流程内容(采写编评)", "主导起号与涨粉策略", "参与直播与活动引流"]}, {"n": 45, "name": "邱可嘉", "sid": "231210208", "cls": "传播2302", "g": 5, "res": 1, "tag": ["SHEIN", "国家专项"], "role": "数据分析 & 用户增长 & 问卷", "str": "SHEIN 大厂用户增长,国家专项学霸,营销号热点快剪,Excel 数据。", "tasks": ["负责香氛用户增长与数据复盘看板", "协助问卷设计与漏斗分析", "制作热点快剪内容", "优化获客与转化效率"]}];
+
+/* 通用 12 步绝密 SOP */
+const SOP = [
+ {t:"立项与赛道锁定",who:"组长",how:"明确目标人群(ICP)、场景、客单与变现假设,写一页《赛道立项书》。",out:"立项书+用户画像",zero:"模板免费,1 小时。"},
+ {t:"零成本情报采集",who:"研究/调研岗",how:"平台搜索指数+竞品爆文导出+评论挖掘+问卷+深访,3 天回收。",out:"原始数据(爆文/评论/问卷/访谈)",zero:"巨量算数/千瓜免费版+问卷星,0 元。"},
+ {t:"取样与样本设计",who:"研究负责人",how:"按年级×性别×消费力配额做分层抽样,定拦访点位与滚雪球路径,定 n。",out:"取样方案+配额表",zero:"校园场景,0 成本。"},
+ {t:"问卷 + 深访执行",who:"问卷岗 + 深访岗",how:"问卷扫码回收 ≥100;深访 10–12 人双机位拍摄(主问+花絮)。",out:"问卷数据+访谈录像",zero:"手机录制,0 元。"},
+ {t:"数据结构化建库",who:"数据岗",how:"原始数据入统一表:需求词/热度/痛点/情绪/竞品/价格;访谈打标签。",out:"结构化数据库",zero:"用本站『数据看板』或飞书表格。"},
+ {t:"痛点与机会萃取",who:"研究+策略",how:"词频+情绪分析找『热度升×痛点强×竞品弱』爆点候选。",out:"痛点机会报告",zero:"人工+AI,0 元。"},
+ {t:"选题与钩子设计",who:"内容+策略",how:"用『反常识钩子×强情绪×1 动作』产出 20 条选题,过爆款评分器。",out:"选题库+钩子脚本",zero:"用本站『爆款评分』。"},
+ {t:"内容生产(含访谈视频化)",who:"内容+剪辑",how:"把访谈现场剪成街访短视频;AI 分镜/数字人+手机拍摄+剪映,3 天首批 10 条。",out:"首批内容样品",zero:"全免费工具。"},
+ {t:"10 样品投放与 A/B",who:"运营+组长",how:"按『10 样品分配器』投放,控制变量做 A/B,72h 观察。",out:"投放记录",zero:"自然流量 0 预算起。"},
+ {t:"实时数据回收诊断",who:"数据岗",how:"回收触达/互动/转化/成本,算 CPE、CVR、ROI,看板排名。",out:"投放诊断看板",zero:"用本站『数据看板』。"},
+ {t:"私域承接与转化",who:"运营",how:"评论区/主页引流企业微信/社群;私域内发问卷+招体验官,形成二次调研。",out:"私域用户池+首单",zero:"企业微信免费。"},
+ {t:"复盘 · SOP 固化 · 移交",who:"组长",how:"沉淀可复制 SOP,做成零基础也能跑通的手册移交下一届。",out:"赛道 SOP 手册",zero:"沉淀即资产,0 元。"}
+];
+
+/* 调研即内容:把现场访谈变吸粉视频→私域闭环 */
+const PIPELINE = [
+ {t:"现场双机位",d:"街访/校园拦访/深访同时开拍:A 机位主问对话,B 机位花絮空镜,一次采集两份素材。"},
+ {t:"真话即素材",d:"受访者的真实回答 = 真实痛点 = 选题库;原话金句直接做封面文案。"},
+ {t:"剪成街访视频",d:"剪 30–60s『100 个大学生怎么看 XX』系列,真实感强、完播高,天然吸粉。"},
+ {t:"评论区埋钩子",d:"『你也这样吗?扣 1 / 评论区领清单』——互动数据本身就是第二轮调研。"},
+ {t:"引流私域",d:"主页/置顶/评论把人导到企业微信与社群,完成公域到私域的沉淀。"},
+ {t:"私域再调研+转化",d:"社群里发深度问卷、招体验官、试投产品,验证转化并回到产品迭代,闭环。"}
+];
+
+const TOOLINFO = "全部工具在浏览器本地运行,不联网、不保存数据,刷新即清空——安全且零成本。";
+/* ===== 工具函数 ===== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const gm=g=>PEOPLE.filter(p=>p.g===g);
+const leaderOf=g=>PEOPLE.find(p=>p.n===GROUPS[g].leader);
+const byNum=n=>PEOPLE.find(p=>p.n===n);
+const shortRole=r=>r.replace(/^组长\s*·\s*/,"").split("&")[0].trim();
+
+function engine(labels){
+ const st=labels||["数据采集","数据分析","内容引爆","商业变现"];
+ return '<div class="engine">'+st.map((s,i)=>'<div class="enode"><span class="ei">0'+(i+1)+'</span><span class="et">'+esc(s)+'</span></div>'+(i<st.length-1?'<div class="econn"><i></i></div>':'')).join("")+'</div>';
+}
+
+/* ===== 首页 ===== */
+function vHome(){
+ return `
+ <header class="hero">
+   <div class="eyebrow">东华大学 · 新媒体运营 · 七赛道孵化作战手册 <span class="cls">CONFIDENTIAL</span></div>
+   <h1>把每个赛道,造成一台<br><em>自己会跑、会赚钱的内容引擎</em></h1>
+   <p class="lede">44 名学员 · 7 赛道 · 7 位组长 · 10 个样品。从零成本市场摸底,到内容引爆,再到商业变现——全流程、可复制、零基础也能跑通。</p>
+   ${engine()}
+   <div class="stats">
+     <div><b>44</b><span>在岗学员(#26 缺考)</span></div>
+     <div><b>7</b><span>赛道 / 小组</span></div>
+     <div><b>7</b><span>组长(班长·学委·团支书)</span></div>
+     <div><b>10</b><span>市场测试样品</span></div>
+   </div>
+   <div class="cta-row">
+     <a class="btn gold" href="#/system">进入系统中枢与工具 →</a>
+     <a class="btn ghost" href="#/people">全员任务档案(可复制)</a>
+   </div>
+ </header>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>七大赛道总览</h2>
+   <div class="grid tracks">
+   ${Object.entries(GROUPS).map(([g,t])=>{const L=leaderOf(+g);return `
+     <a class="card track" href="#/track/t${g}" style="--ac:${t.accent}">
+       <div class="tk-top"><span class="emoji">${t.emoji}</span><span class="code">${t.code}</span></div>
+       <h3>${esc(t.track)}</h3><p>${esc(t.tagline)}</p>
+       <div class="tk-foot"><span>组长 #${t.leader} ${esc(L?L.name:"")}</span><span>${gm(+g).length} 人</span></div>
+     </a>`;}).join("")}
+   </div>
+ </section>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>分组与组长(G1–G7)</h2>
+   <p class="note">由 3 位班长、1 位学习委员、3 位团支部书记共 7 人担任组长。大赛获奖者已均衡分配——每组至少 1 位;市场调研为多人协作的核心环节(标注 <span style="color:var(--teal)">调研</span> 者为研究岗)。</p>
+   <div class="grid g3">
+   ${Object.entries(GROUPS).map(([g,t])=>{const L=leaderOf(+g);return `
+     <div class="card lead">
+       <div class="lead-h"><span class="gtag">G${g}</span><span class="trk">${t.emoji} ${esc(t.track)}</span></div>
+       <div class="lead-n">#${t.leader} ${esc(L?L.name:"")} <small>${esc(L?(L.tag.find(x=>/班长|学习委员|团支/.test(x))||""):"")}</small></div>
+       <div class="lead-m">${gm(+g).map(p=>`<span>#${p.n} ${esc(p.name)}${p.res?" ·调研":""}</span>`).join("")}</div>
+     </div>`;}).join("")}
+   </div>
+ </section>
+ <section class="block tip">
+   <h2 class="sec"><span class="dot"></span>怎么用这套手册</h2>
+   <ol class="how">
+     <li><b>组长</b>先读《系统中枢》掌握 12 步 SOP、调研即内容闭环与 5 个工具,再读本组赛道页。</li>
+     <li><b>每位组员</b>在《全员档案》找到自己的卡片,点「复制任务卡」即可领到含『同组成员与各自任务』的完整分工,直接转发给本人。</li>
+     <li>全组按赛道页推进:市场摸底(问卷+深访+取样)→ 把访谈拍成视频吸粉 → 引爆 → 商业/盈利模式 → 10 样品 → 私域转化,用工具记录数据、持续迭代。</li>
+     <li>每个赛道页底部即《金奖商业计划书》,对标中国国际大学生创新大赛/三创评审结构。</li>
+     <li>想要永久网址?见《部署上线》——3 分钟免费发布。</li>
+   </ol>
+ </section>`;
+}
+
+/* ===== 系统中枢 ===== */
+function vSystem(){
+ return `
+ <header class="phead">
+   <div class="eyebrow">SYSTEM · 系统中枢 <span class="cls">绝密</span></div>
+   <h1>市场调研 + 数据分析系统</h1>
+   <p class="lede">一套通用的「采集 → 分析 → 引爆 → 变现」方法、工具与调研即内容闭环,所有赛道共用。${TOOLINFO}</p>
+   ${engine()}
+ </header>
+
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>调研即内容:把访谈变成吸粉视频 → 私域</h2>
+   <p class="note">最巧妙的省钱设计——市场调研的现场,同时就是新媒体素材。一次采集,既得数据洞察,又得吸粉内容,还能沉淀私域。</p>
+   <div class="pipe">
+     ${PIPELINE.map(p=>`<div class="pstep"><h4>${esc(p.t)}</h4><p>${esc(p.d)}</p></div>`).join("")}
+   </div>
+   <div class="loopback">↻ 私域再调研 → 反哺产品与选题 → 形成持续放大的飞轮</div>
+ </section>
+
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>12 步绝密 SOP(从采集到变现)</h2>
+   <div class="sop">
+   ${SOP.map((s,i)=>`<div class="sop-step">
+     <div class="sn">${String(i+1).padStart(2,"0")}</div>
+     <div class="sb"><h4>${esc(s.t)} <span class="who">${esc(s.who)}</span></h4>
+     <p>${esc(s.how)}</p>
+     <div class="meta"><span>产出:${esc(s.out)}</span><span class="z">0 成本:${esc(s.zero)}</span></div></div>
+   </div>`).join("")}
+   </div>
+ </section>
+
+ <section class="block tools-skip">
+   <h2 class="sec"><span class="dot"></span>交互工具(本地运行 · 零成本)</h2>
+
+   <div class="tool">
+     <h3><b>①</b> 10 样品投放分配器</h3>
+     <p class="tdesc">输入样品数与策略,自动给出投放分配方案与理由。</p>
+     <div class="tform">
+       <label>样品总数<input id="al-n" type="number" value="10" min="1" max="50"></label>
+       <label>策略
+         <select id="al-s">
+           <option value="focus">集中验证(押注单一细分,最快出结论)</option>
+           <option value="spread">分散探测(覆盖多细分,找爆点)</option>
+           <option value="ab">A/B 对照(同细分测变量)</option>
+         </select>
+       </label>
+       <button class="btn gold sm" id="al-go">生成方案</button>
+     </div>
+     <div id="al-out" class="tout"></div>
+   </div>
+
+   <div class="tool">
+     <h3><b>②</b> 调研样本量 / 配额计算器</h3>
+     <p class="tdesc">按目标总体与置信水平估算建议问卷份数,并给出分层配额。</p>
+     <div class="tform">
+       <label>目标人群规模<input id="ss-N" type="number" value="3000" min="30"></label>
+       <label>置信度
+         <select id="ss-z"><option value="1.645">90%</option><option value="1.96" selected>95%</option><option value="2.576">99%</option></select>
+       </label>
+       <label>误差±%<input id="ss-e" type="number" value="8" min="1" max="20"></label>
+       <button class="btn gold sm" id="ss-go">计算样本量</button>
+     </div>
+     <div id="ss-out" class="tout"></div>
+   </div>
+
+   <div class="tool">
+     <h3><b>③</b> 爆款潜力评分器(BPI)</h3>
+     <p class="tdesc">为一条选题打分,0–100 分,给出判断与优化建议。</p>
+     <div id="bpi-form" class="bpi"></div>
+     <button class="btn gold sm" id="bpi-go">计算得分</button>
+     <div id="bpi-out" class="tout"></div>
+   </div>
+
+   <div class="tool">
+     <h3><b>④</b> 市场摸底 / 投放数据看板</h3>
+     <p class="tdesc">录入各渠道测试数据,自动算 CPE、转化率、ROI 并排名,标出最优渠道。可导出 CSV。</p>
+     <div class="dtbl-wrap">
+       <table class="dtbl" id="dt">
+         <thead><tr><th>渠道/选题</th><th>触达</th><th>互动</th><th>转化</th><th>成本¥</th><th>CPE</th><th>转化率</th><th>ROI*</th><th></th></tr></thead>
+         <tbody></tbody>
+       </table>
+     </div>
+     <div class="dtbar">
+       <button class="btn ghost sm" id="dt-add">+ 添加一行</button>
+       <button class="btn ghost sm" id="dt-csv">导出 CSV</button>
+       <label class="inline">客单价¥<input id="dt-aov" type="number" value="49" min="0" style="width:80px"></label>
+     </div>
+     <p class="micro">*ROI = 转化 × 客单价 ÷ 成本;CPE = 成本 ÷ 互动。绿色行为当前 ROI 最优。</p>
+   </div>
+
+   <div class="tool">
+     <h3><b>⑤</b> 盈利模型计算器(单位经济)</h3>
+     <p class="tdesc">测算毛利、获客回收与单客利润,判断模式是否健康。</p>
+     <div class="tform">
+       <label>客单价¥<input id="ue-p" type="number" value="49"></label>
+       <label>单件成本¥<input id="ue-c" type="number" value="20"></label>
+       <label>单客获客成本¥<input id="ue-cac" type="number" value="6"></label>
+       <label>年复购次数<input id="ue-rep" type="number" value="3"></label>
+       <button class="btn gold sm" id="ue-go">测算</button>
+     </div>
+     <div id="ue-out" class="tout"></div>
+   </div>
+ </section>`;
+}
+
+/* ===== 赛道页 ===== */
+function vTrack(g){
+ const t=GROUPS[g]; if(!t) return vHome();
+ const L=leaderOf(g); const mem=gm(g); const o=OPTIM[g]; const fn=n=>n.toLocaleString('en-US');
+ const chip=(v,l)=>'<div class="chip"><span style="font-family:var(--mono);font-size:17px;color:var(--gold2);font-weight:700">'+v+'</span><small>'+l+'</small></div>';
+ const pane=(title,items,sub)=>`<div class="tpane" style="--ac:${t.accent}"><h3>${title}${sub?` <span class="tn">${sub}</span>`:""}</h3><ul class="tlist">${items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+ const qa=(title,arr,sub)=>`<div class="tpane" style="--ac:${t.accent}"><h3>${title}${sub?` <span class="tn">${sub}</span>`:""}</h3><ol class="qa">${arr.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`;
+ return `
+ <header class="phead" style="--ac:${t.accent}">
+   <div class="eyebrow">${t.emoji} 赛道 ${t.code} · G${g} <span class="cls">绝密操作手册</span></div>
+   <h1>${esc(t.track)}</h1>
+   <p class="lede">${esc(t.tagline)}</p>
+   ${engine(["市场摸底·问卷深访","数据分析","访谈视频化引爆","私域变现"])}
+ </header>
+
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>作战小组 G${g}(${mem.length} 人)</h2>
+   <p class="note">组长 <b style="color:var(--gold2)">#${L.n} ${esc(L.name)}</b> · ${esc(shortRole(L.role))}。点击成员查看个人任务卡。</p>
+   <div class="tband">
+     ${mem.map(p=>`<a href="#/person/${p.n}">#${p.n} ${esc(p.name)} · ${esc(shortRole(p.role))}${p.res?' <span style="color:var(--teal)">·调研</span>':""}</a>`).join("")}
+   </div>
+ </section>
+
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>一、市场调研系统</h2>
+   ${pane("零成本市场摸底法",t.sounding,"3 天跑完")}
+   ${pane("取样方式与样本设计",t.sampling,"分层抽样")}
+   ${qa("问卷内容(扫码即填,≥100 份)",t.survey,"10 题")}
+   ${qa("深度访谈提纲(10–12 人 · 双机位拍摄)",t.interview,"开放式")}
+   <div class="tpane" style="--ac:${t.accent}"><h3>调研即内容 <span class="tn">吸粉→私域</span></h3>
+     <p style="font-size:14.5px;color:var(--mut)">把上面的<b>街访 + 深访现场双机位拍摄</b>,剪成『100 个同学怎么看${esc(t.track)}』系列短视频:真实回答即痛点素材,评论区埋『扣 1 领清单』做二次调研,引流企业微信/社群沉淀私域,再在私域发问卷、招体验官、试投${esc(t.track)}样品完成转化。详见 <a href="#/system" style="color:var(--teal)">系统中枢 · 调研即内容闭环</a>。</p></div>
+   ${pane("数据分析系统",t.data)}
+ </section>
+
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>二、引爆与商业模式</h2>
+   ${pane("迅速引爆方法",t.viral)}
+   ${pane("商业模式(高校可落地)",t.model)}
+   ${pane("盈利模式",t.profit)}
+   ${pane("10 样品投放方案",t.ten,"市场测试")}
+   ${pane("零成本跑通路径",t.zero,"0 资金")}
+ </section>
+
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>三、最优商业模型(程序寻优)</h2>
+   <p class="note">在「零成本获客 + 仅 10 个样品 + 团队产能」约束下,枚举 100+ 组合、模拟 12 个月迭代寻优得到的最优解。以下为模型推演的目标值(用于设定 KPI),非收益承诺。</p>
+   <div class="tpane" style="--ac:${t.accent}">
+     <h3>最优配置 <span class="tn">寻优结果</span></h3>
+     <ul class="tlist">
+       <li>主推产品 / 盈利点:<b>${esc(o.offer)}(¥${o.price})</b></li>
+       <li>内容更新:<b>${o.cad} 条/月</b> · 钩子强度:<b>${esc(o.hook)}</b> · 街访内容占比:<b>${o.irat}%</b></li>
+       <li>私域池 → 购买转化率:<b>${o.buy}%</b></li>
+     </ul>
+     <div class="depthead" style="margin-top:14px">
+       ${chip('¥'+fn(o.profit),'年毛利润(推演)')}${chip('¥'+fn(o.rev),'年营收')}${chip('≈'+fn(o.foll),'年末粉丝')}${chip('≈'+fn(o.pd),'私域沉淀')}${chip('≈'+o.buyers+' 单/月','稳态月成交')}${chip('¥'+o.ltv,'单客 LTV')}
+     </div>
+     <p style="margin-top:14px;font-size:13.5px;color:var(--mut)"><b style="color:var(--gold2)">迭代收敛:</b>从最差配置 ¥${fn(o.path[0])} 逐步优化至最优 ¥${fn(o.path[o.path.length-1])},整体提升约 <b style="color:var(--teal)">${o.lift}%</b>。路径(年利润¥):${o.path.map(fn).join(' → ')}</p>
+     <div style="margin-top:10px">
+       ${o.q.map((v,i)=>'<div class="allocrow"><span class="lab">第'+(i+1)+'季度累计</span><span class="barwrap"><span class="bar" style="width:'+(v/o.q[3]*100)+'%"></span></span><span class="v">¥'+fn(v)+'</span></div>').join('')}
+     </div>
+     <p class="micro" style="margin-top:10px">▸ 打法:街访/深访短视频零成本获客 → 私域二次调研锁需求 → 主推「${esc(o.offer)}」转化 → 用数据看板持续 A/B 优化,逐月逼近目标。B 端合作为额外增量,未计入此保守推演。</p>
+   </div>
+ </section>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>四、金奖商业计划书</h2>
+   <p class="note">${esc(BP[g].name)} —— 对标中国国际大学生创新大赛 / 三创赛评审维度(团队、创新、市场、模式、财务、社会价值)。</p>
+   <div class="bp">
+     ${BP[g].s.map(p=>{const m=p.match(/^【(.+?)】([\s\S]*)$/);return m?`<p><b>${esc(m[1])}</b><br>${esc(m[2])}</p>`:`<p>${esc(p)}</p>`;}).join("")}
+   </div>
+ </section>
+ <div class="cta-row"><a class="btn ghost" href="#/people">查看本组成员任务卡 →</a><button class="btn gold" onclick="window.print()">打印 / 存为 PDF 手册</button></div>`;
+}
+
+/* ===== 全员档案 ===== */
+function vPeople(){
+ const tabs=[["all","全部"]].concat(Object.entries(GROUPS).map(([g,t])=>["g"+g,"G"+g+" "+t.track]));
+ return `
+ <header class="phead">
+   <div class="eyebrow">ROSTER · 全员任务档案 <span class="cls">44 人</span></div>
+   <h1>每个人的分工任务卡</h1>
+   <p class="lede">含编号、姓名、赛道、角色、个人任务,以及『同组成员名单与各自任务』。点「复制任务卡」即可单独转发给本人。</p>
+ </header>
+ <div class="pfilter" id="pfilter">${tabs.map((x,i)=>`<button data-f="${x[0]}" class="${i===0?"on":""}">${esc(x[1])}</button>`).join("")}</div>
+ <div class="pcards" id="pcards">${PEOPLE.map(pcard).join("")}</div>`;
+}
+function pcard(p){
+ const t=GROUPS[p.g]; const mates=gm(p.g).filter(m=>m.n!==p.n);
+ const isLead=p.tag.some(x=>/组长/.test(x));
+ return `<div class="pcard" data-g="g${p.g}" id="pc-${p.n}">
+   <div class="ph"><div><div class="pid">#${p.n} · ${esc(p.cls)}</div><div class="pn">${esc(p.name)}</div></div>
+   <span class="ptrk">${t.emoji} ${esc(t.track)}</span></div>
+   <div class="pbadges">${isLead?'<span class="lead">组长 G'+p.g+'</span>':""}${p.res?'<span class="res">市场调研岗</span>':""}${p.tag.filter(x=>!/组长/.test(x)).map(x=>`<span>${esc(x)}</span>`).join("")}</div>
+   <div class="prole">${esc(p.role)}</div>
+   <div class="pstr">${esc(p.str)}</div>
+   <div class="more" onclick="this.parentNode.classList.toggle('open')">▾ 展开个人任务与同组成员</div>
+   <div class="detail">
+     <h5>个人任务</h5><ul>${p.tasks.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+     <h5>同组成员与各自任务</h5>
+     <div class="mates">${mates.map(m=>`<a href="#/person/${m.n}">#${m.n} ${esc(m.name)}·${esc(shortRole(m.role))}</a>`).join("")}</div>
+   </div>
+   <div class="pbtns"><button class="copybtn" onclick="copyPerson(${p.n},this)">复制任务卡</button><a class="copybtn" style="flex:0 0 auto;text-decoration:none;display:grid;place-items:center" href="#/person/${p.n}">详情页</a></div>
+ </div>`;
+}
+
+/* ===== 个人详情页 ===== */
+function vPerson(n){
+ const p=byNum(n); if(!p) return vPeople();
+ const t=GROUPS[p.g]; const L=leaderOf(p.g); const mates=gm(p.g).filter(m=>m.n!==p.n);
+ return `
+ <header class="phead" style="--ac:${t.accent}">
+   <div class="eyebrow"><a href="#/people" style="color:var(--gold)">← 全员档案</a> · 任务卡 #${p.n}</div>
+   <h1>${esc(p.name)} <small style="font-family:var(--sans);font-size:15px;color:var(--mut);font-weight:400">${esc(p.cls)}${p.sid?" · 学号 "+esc(p.sid):""}</small></h1>
+   <p class="lede">${t.emoji} ${esc(t.track)}赛道(G${p.g}) · ${esc(p.role)}</p>
+   <div class="pbadges" style="margin-top:6px">${p.tag.map(x=>`<span class="${/组长/.test(x)?"lead":""}">${esc(x)}</span>`).join("")}${p.res?'<span class="res">市场调研岗</span>':""}</div>
+ </header>
+ <div class="depthead">
+   <div class="chip">赛道<small>${t.emoji} ${esc(t.track)} · ${t.code}</small></div>
+   <div class="chip">小组<small>G${p.g} · 共 ${gm(p.g).length} 人</small></div>
+   <div class="chip">组长<small>#${L.n} ${esc(L.name)}</small></div>
+   <div class="chip">角色<small>${esc(shortRole(p.role))}</small></div>
+ </div>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>个人任务(全流程)</h2>
+   <ul class="tlist" style="--ac:${t.accent}">${p.tasks.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+ </section>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>核心强项</h2>
+   <p class="note">${esc(p.str)}</p>
+ </section>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>同组成员与各自任务</h2>
+   <div class="grid g3">
+   ${mates.map(m=>`<div class="card"><div class="lead-n" style="font-size:16px">#${m.n} ${esc(m.name)}</div><div class="prole" style="margin:6px 0">${esc(m.role)}</div><ul class="detail-ul" style="list-style:none;display:grid;gap:5px;margin-top:6px">${m.tasks.map(x=>`<li style="font-size:12.5px;color:var(--mut);padding-left:14px;position:relative"><span style="position:absolute;left:2px;color:${t.accent}">·</span>${esc(x)}</li>`).join("")}</ul></div>`).join("")}
+   </div>
+ </section>
+ <div class="cta-row"><button class="btn gold" onclick="copyPerson(${p.n},this)">复制完整任务卡</button><a class="btn ghost" href="#/track/t${p.g}">查看赛道手册 →</a></div>`;
+}
+
+/* ===== 部署上线 ===== */
+function vDeploy(){
+ return `
+ <header class="phead">
+   <div class="eyebrow">DEPLOY · 部署上线 <span class="cls">永久免费网址</span></div>
+   <h1>3 分钟把它发布成永久网址</h1>
+   <p class="lede">这是一个单文件网站(index.html),零成本、零服务器。任选一种免费方式发布,即可得到一个永久、唯一、可分享给全班的网址。</p>
+ </header>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>方式 A · GitHub Pages(推荐,永久免费)</h2>
+   <ol class="how">
+     <li>注册 github.com,新建一个仓库(如 <code>media-ops</code>),勾选 Public。</li>
+     <li>上传本 <b>index.html</b>(网页 Add file → Upload files → 拖入 → Commit)。</li>
+     <li>仓库 Settings → Pages → Branch 选 <code>main</code> / 根目录 → Save。</li>
+     <li>约 1 分钟后得到永久网址:<code>https://你的用户名.github.io/media-ops/</code>,把它发给全班即可。</li>
+   </ol>
+ </section>
+ <section class="block">
+   <h2 class="sec"><span class="dot"></span>方式 B · Netlify Drop(最快,拖拽即上线)</h2>
+   <ol class="how">
+     <li>打开 <code>app.netlify.com/drop</code>。</li>
+     <li>把 index.html 直接拖进网页框。</li>
+     <li>立即获得一个网址;注册后可固定为永久域名并自定义名称。</li>
+   </ol>
+ </section>
+ <section class="block tip">
+   <h2 class="sec"><span class="dot"></span>说明与建议</h2>
+   <ul class="tlist">
+     <li>当前文件可直接双击在浏览器打开使用,无需联网(字体在联网时更美观)。</li>
+     <li>每位组员的任务卡也可在《全员档案》点「复制任务卡」直接微信转发,无需等网址。</li>
+     <li>任意页面可点「打印 / 存为 PDF」,把赛道手册或任务卡导出为 PDF 文档零成本分发。</li>
+     <li>如需我把『绝密操作手册 / 商业计划书 / 全员任务表』另外导出为可下载的 Word/PDF 文件,告诉我即可。</li>
+   </ul>
+ </section>`;
+}
+/* ===== 复制任务卡 ===== */
+function copyPerson(n,btn){
+ const p=byNum(n); if(!p) return;
+ const t=GROUPS[p.g]; const L=leaderOf(p.g); const mates=gm(p.g).filter(m=>m.n!==p.n);
+ let s="【新媒体运营 · 个人任务卡】\n";
+ s+="编号:#"+p.n+"   姓名:"+p.name+"   班级:"+p.cls+(p.sid?("   学号:"+p.sid):"")+"\n";
+ s+="赛道:"+t.emoji+" "+t.track+"(G"+p.g+" 组)   组长:#"+L.n+" "+L.name+"\n";
+ s+="角色:"+p.role+(p.res?"(市场调研核心岗)":"")+"\n\n";
+ s+="▍个人任务(全流程)\n";
+ p.tasks.forEach((x,i)=>{s+=(i+1)+". "+x+"\n";});
+ s+="\n▍同组成员名单与各自任务\n";
+ mates.forEach(m=>{s+="● #"+m.n+" "+m.name+" — "+m.role+"\n";m.tasks.forEach(x=>{s+="   - "+x+"\n";});});
+ s+="\n— 东华大学人文学院 · 新媒体运营实战项目 · "+t.track+"赛道";
+ const done=()=>{const o=btn.textContent;btn.textContent="已复制 ✓";btn.classList.add("done");setTimeout(()=>{btn.textContent=o;btn.classList.remove("done");},2000);};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(done).catch(()=>fallback(s,done));}
+ else fallback(s,done);
+}
+function fallback(s,cb){const ta=document.createElement("textarea");ta.value=s;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");cb();}catch(e){alert("复制失败,请手动选择文本");}document.body.removeChild(ta);}
+
+/* ===== 工具绑定 ===== */
+const BPI_DIMS=[["钩子强度(前3秒)",0.18],["情绪共鸣",0.16],["实用/收藏价值",0.14],["新奇/反差感",0.12],["视觉质感",0.12],["参与互动设计",0.12],["发布时机",0.08],["平台契合度",0.08]];
+
+function bindTools(){
+ // ① 分配器
+ const alGo=$("#al-go");
+ if(alGo) alGo.onclick=()=>{
+   const n=Math.max(1,Math.min(50,+$("#al-n").value||10)), s=$("#al-s").value; let rows=[],tip="";
+   if(s==="focus"){const main=Math.round(n*0.7);rows=[["主投放(目标细分)",main],["对照组(同细分变量)",n-main]];tip="把火力压在最有把握的单一细分,用对照组验证因果。72 小时即可得到明确结论,再放大。";}
+   else if(s==="spread"){const segs=["细分A","细分B","细分C","细分D","细分E"];const base=Math.floor(n/5),rem=n%5;rows=segs.map((x,i)=>[x,base+(i<rem?1:0)]);tip="把样品摊到 5 个细分广撒网,先找出哪个细分反应最强,再集中放大。适合赛道方向未定时。";}
+   else {const half=Math.floor(n/2);rows=[["A 版(原方案)",half],["B 版(单一变量)",n-half]];tip="同一细分只改一个变量(封面/钩子/价格),其余完全一致,用结果判断该变量影响。";}
+   const max=Math.max(...rows.map(r=>r[1]));
+   $("#al-out").innerHTML='<div class="res">'+rows.map(r=>'<div class="allocrow"><span class="lab">'+r[0]+'</span><span class="barwrap"><span class="bar" style="width:'+(r[1]/max*100)+'%"></span></span><span class="v">'+r[1]+' 份</span></div>').join("")+'<p class="micro" style="margin-top:10px">▸ '+tip+'</p></div>';
+ };
+ // ② 样本量
+ const ssGo=$("#ss-go");
+ if(ssGo) ssGo.onclick=()=>{
+   const N=Math.max(30,+$("#ss-N").value||3000), z=+$("#ss-z").value, e=Math.max(1,+$("#ss-e").value||8)/100;
+   const n0=(z*z*0.25)/(e*e); const n=Math.ceil(n0/(1+(n0-1)/N)); const rec=Math.ceil(n*1.2);
+   $("#ss-out").innerHTML='<div class="res"><div class="verdict">建议有效问卷 ≈ '+n+' 份</div>'+
+     '<p class="micro">考虑废卷,实际发放建议 <b style="color:var(--gold2)">'+rec+' 份</b>(×1.2 缓冲)。</p>'+
+     '<p style="margin-top:10px;font-size:13.5px;color:var(--mut)">分层配额参考(按性别均分 + 年级分布):</p>'+
+     '<div class="allocrow"><span class="lab">大一/大二</span><span class="barwrap"><span class="bar" style="width:55%"></span></span><span class="v">'+Math.round(n*0.55)+' 份</span></div>'+
+     '<div class="allocrow"><span class="lab">大三/大四</span><span class="barwrap"><span class="bar" style="width:30%"></span></span><span class="v">'+Math.round(n*0.30)+' 份</span></div>'+
+     '<div class="allocrow"><span class="lab">研究生/其他</span><span class="barwrap"><span class="bar" style="width:15%"></span></span><span class="v">'+Math.round(n*0.15)+' 份</span></div>'+
+     '<p class="micro" style="margin-top:8px">▸ 配合 10–12 人深访做质性补充;深访按细分人群各 3 人覆盖。</p></div>';
+ };
+ // ③ BPI
+ const bf=$("#bpi-form");
+ if(bf&&!bf.dataset.built){bf.dataset.built="1";bf.innerHTML=BPI_DIMS.map((d,i)=>'<div class="sv"><div class="row"><span>'+d[0]+'</span><span id="bv'+i+'" style="font-family:var(--mono);color:var(--gold2)">60</span></div><input type="range" min="0" max="100" value="60" data-i="'+i+'" oninput="document.getElementById(\'bv\'+this.dataset.i).textContent=this.value"></div>').join("");}
+ const bGo=$("#bpi-go");
+ if(bGo) bGo.onclick=()=>{
+   let sc=0;$$("#bpi-form input[type=range]").forEach(r=>{sc+=(+r.value)*BPI_DIMS[+r.dataset.i][1];});sc=Math.round(sc);
+   let v,c,tipv;if(sc>=80){v="🔥 强爆款潜力";c="var(--teal)";tipv="可优先投放,准备好私域承接与转化路径。";}
+   else if(sc>=65){v="✅ 良好,值得一试";c="var(--gold2)";tipv="挑分数最低的 1–2 项优化(通常是钩子或互动设计)再发。";}
+   else if(sc>=50){v="⚠️ 中等,需打磨";c="var(--gold)";tipv="重做前 3 秒钩子与情绪点,提升反差感后再测。";}
+   else {v="✋ 偏弱,建议重构";c="var(--rose)";tipv="选题或角度本身偏弱,回到痛点库换更尖锐的切入。";}
+   $("#bpi-out").innerHTML='<div class="res"><div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap"><span class="scorebig" style="color:'+c+'">'+sc+'</span><div><div class="verdict" style="color:'+c+'">'+v+'</div><p class="micro">满分 100。▸ '+tipv+'</p></div></div></div>';
+ };
+ // ④ 数据看板
+ const tb=$("#dt tbody");
+ if(tb){
+   if(!tb.dataset.init){tb.dataset.init="1";[["抖音·街访",5000,420,38,120],["小红书·测评",3000,260,29,90],["视频号·科普",2000,150,12,60]].forEach(r=>addDtRow(r));}
+   $("#dt-add").onclick=()=>{addDtRow(["新渠道",1000,80,8,50]);dtCalc();};
+   $("#dt-csv").onclick=dtCsv;$("#dt-aov").oninput=dtCalc;dtCalc();
+ }
+ // ⑤ 盈利模型
+ const ueGo=$("#ue-go");
+ if(ueGo) ueGo.onclick=()=>{
+   const p=+$("#ue-p").value||0,c=+$("#ue-c").value||0,cac=+$("#ue-cac").value||0,rep=+$("#ue-rep").value||1;
+   const gm1=p-c,gmr=p>0?gm1/p*100:0,ltv=gm1*rep,net=ltv-cac,ratio=cac>0?ltv/cac:99,pay=gm1>0?cac/gm1:99;
+   let v,col;if(ratio>=3&&net>0){v="💚 模式健康(LTV/CAC ≥ 3)";col="var(--teal)";}else if(ratio>=1.5){v="🟡 可行,需提升复购或降获客成本";col="var(--gold2)";}else{v="🔴 不健康,单客难回本";col="var(--rose)";}
+   $("#ue-out").innerHTML='<div class="res"><div class="verdict" style="color:'+col+'">'+v+'</div><div class="depthead" style="margin:12px 0 0">'+
+     chip("单件毛利","¥"+gm1.toFixed(1)+" ("+gmr.toFixed(0)+"%)")+chip("年客户价值 LTV","¥"+ltv.toFixed(1))+chip("单客净利","¥"+net.toFixed(1))+chip("回本所需订单",(pay<99?pay.toFixed(1)+" 单":"—"))+chip("LTV/CAC",(ratio<99?ratio.toFixed(1)+"×":"—"))+'</div></div>';
+ };
+}
+function chip(l,v){return '<div class="chip">'+v+'<small>'+l+'</small></div>';}
+function addDtRow(d){const tb=$("#dt tbody");const tr=document.createElement("tr");
+ tr.innerHTML='<td><input value="'+d[0]+'"></td><td><input type="number" value="'+d[1]+'"></td><td><input type="number" value="'+d[2]+'"></td><td><input type="number" value="'+d[3]+'"></td><td><input type="number" value="'+d[4]+'"></td><td class="calc cpe">–</td><td class="calc cvr">–</td><td class="calc roi">–</td><td><button class="del">✕</button></td>';
+ tr.querySelector(".del").onclick=()=>{tr.remove();dtCalc();};
+ $$("input",tr).forEach(i=>i.oninput=dtCalc);tb.appendChild(tr);}
+function dtCalc(){const aov=+$("#dt-aov").value||0;let best=-1,bi=null;
+ $$("#dt tbody tr").forEach(tr=>{const v=$$("input",tr).map(x=>x.value);const reach=+v[1],eng=+v[2],conv=+v[3],cost=+v[4];
+   const cpe=eng>0?cost/eng:0,cvr=reach>0?conv/reach*100:0,roi=cost>0?conv*aov/cost:0;
+   tr.querySelector(".cpe").textContent=cpe?("¥"+cpe.toFixed(2)):"–";
+   tr.querySelector(".cvr").textContent=cvr?(cvr.toFixed(2)+"%"):"–";
+   tr.querySelector(".roi").textContent=roi?(roi.toFixed(2)):"–";
+   tr.classList.remove("best");if(cost>0&&roi>best){best=roi;bi=tr;}});
+ if(bi)bi.classList.add("best");}
+function dtCsv(){let rows=[["渠道/选题","触达","互动","转化","成本","CPE","转化率%","ROI"]];
+ $$("#dt tbody tr").forEach(tr=>{const v=$$("input",tr).map(x=>x.value);rows.push([v[0],v[1],v[2],v[3],v[4],tr.querySelector(".cpe").textContent,tr.querySelector(".cvr").textContent,tr.querySelector(".roi").textContent]);});
+ const csv="\ufeff"+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(",")).join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="市场测试数据.csv";a.click();}
+
+/* ===== 路由 ===== */
+function route(){
+ const h=location.hash.replace(/^#/,"")||"/home";const seg=h.split("/").filter(Boolean);
+ let html,key;
+ if(seg[0]==="track"){const g=+(seg[1]||"t1").replace("t","");html=vTrack(g);key="track";}
+ else if(seg[0]==="people"){html=vPeople();key="people";}
+ else if(seg[0]==="person"){html=vPerson(+seg[1]);key="people";}
+ else if(seg[0]==="system"){html=vSystem();key="system";}
+ else if(seg[0]==="deploy"){html=vDeploy();key="deploy";}
+ else {html=vHome();key="home";}
+ const app=$("#app");app.innerHTML=html;
+ $$(".nav a").forEach(a=>{const href=a.getAttribute("href").replace(/^#/,"");a.classList.toggle("on",href===("#"+h).replace(/^#/,"")||a.dataset.k===key&&!(key==="track"));
+   if(key==="track")a.classList.toggle("on",href===h);});
+ // ensure exact track link highlighted
+ if(key==="track"){$$(".nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+h));}
+ closeNav();window.scrollTo(0,0);
+ bindTools();
+ requestAnimationFrame(()=>$$(".enode").forEach((n,i)=>setTimeout(()=>n.classList.add("in"),i*90)));
+}
+function toggleNav(){document.body.classList.toggle("navopen");}
+function closeNav(){document.body.classList.remove("navopen");}
+window.addEventListener("hashchange",route);
+window.addEventListener("DOMContentLoaded",()=>{
+ route();
+ const pf=$("#pfilter");
+ document.addEventListener("click",e=>{
+   const b=e.target.closest("#pfilter button");if(!b)return;
+   $$("#pfilter button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+   const f=b.dataset.f;$$(".pcard").forEach(c=>{c.style.display=(f==="all"||c.dataset.g===f)?"":"none";});
+ });
+});
+if(document.readyState!=="loading"){route();}
+</script>
+</body>
+</html>
